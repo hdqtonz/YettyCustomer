@@ -1,0 +1,46 @@
+.nav-address{
+    background-color: #ECF9F0;
+    color: #ADADAD;
+    height: 55px;
+}
+
+.green-round-btn{
+    background-color: var(--yetty-green);
+    color: #fff;
+    border:none;
+    border-radius: 30px;
+    height: 50px;
+    width: 100%;
+}
+.yellow-btn{
+    background-color: var(--yetty-yellow);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    height: 70px;
+    transition: transform 0.3s;
+}
+
+.yellow-btn:hover{
+    transform: scale(1.05);
+}
+
+.dropdown-height{
+    height: 50px;
+}
+
+.form-input{
+    height: 70px;
+    border-radius: 20px;
+    background-color: #D0CCC722;
+    outline: none;
+    border:none;
+    padding:  30px;
+    width: 100%;
+
+}
+
+
+.form-input:focus{
+    outline: 2px solid var(--yetty-green);
+}

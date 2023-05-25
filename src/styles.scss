@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import '/src/assets/scss/utilities';
+@import '/src/assets/scss/chips';
+
+*,*::before,*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+div{
+    cursor: default;
+}
+
+:root{
+    --yetty-green: #3FA72F;
+    --yetty-yellow: #FFBA33;
+    --yetty-black:#2F2F2F;
+    --yetty-text-white:#E3E2E0;
+    --yetty-light-green: #ECF9F0;
+}
+
+.check-item{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Poppins', "Helvetica Neue", sans-serif; }
+
+.mat-mdc-checkbox-checked .mdc-checkbox__background{
+    border-color: var(--yetty-green) !important;
+    background-color: var(--yetty-green) !important;
+}

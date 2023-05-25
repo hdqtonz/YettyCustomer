@@ -1,0 +1,28 @@
+.call-waiter-btn{
+    border-radius: 20px;
+    height: 70;
+    border: none;
+    outline: none;
+    padding: 20px 50px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 20px;
+    background-color: var(--yetty-yellow);
+}
+
+.request-header{
+    font-size: 25px;
+    font-weight: 500;
+}
+
+@media only screen and (max-width:992px){
+    .language{
+        max-width: 70% !important;
+    }
+}
+
+@media only screen and (max-width:400px){
+    .logo{
+        width: 145px;
+    }
+}

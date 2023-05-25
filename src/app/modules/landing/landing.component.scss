@@ -1,0 +1,50 @@
+.yetty-heading{
+    font-size: 75px;
+    font-weight: 700;
+    color: var(--yetty-black);
+}
+
+.scan{
+    color: var(--yetty-green);
+    font-size: 36px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.scan:hover{
+    text-decoration: underline;
+}
+
+.yellow{
+    color: var(--yetty-yellow);
+}
+
+.about-yetty{
+    color: var(--yetty-black);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.dark-circle{
+    padding: 3vw;
+    border-radius: 50%;
+    background-color: #D0CCC766;
+}
+
+.light-circle{
+    padding: 3vw;
+    border-radius: 50%;
+    background-color: #D0CCC733;
+}
+
+
+@media only screen and (max-width:400px){
+    .yetty-heading{
+        font-size: 42px;
+    }
+    .scan{
+        font-size: 26px;
+        margin-bottom: 50px;
+    }
+}
