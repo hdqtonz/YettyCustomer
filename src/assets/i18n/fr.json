@@ -1,0 +1,20 @@
+{
+    "landingPage": {
+        "yetty-Hero-Section-Title": "FR Yetty <br> Restaurant App",
+        "yetty-Hero-Section-Sub-Title":"FR Scan the QR to Continue",
+        "yetty-About-Section-First-Title":"FR About yetty",
+        "yetty-About-Section-First-Description":"FR Yetty is a digital menu and serving optimization cloud-based web service for restaurants, diners, bars and other kinds of food establishments. It aims to make ordering food and drinks in any establishment easy for customers and personnel and to reduce significantly the trips waiters and other personnel have to make in order to serve customers.",
+        "yetty-About-Section-Second-Description":"FR Yetty is a digital menu and serving optimization cloud-based web service for restaurants, diners, bars and other kinds of food establishments. It aims to make ordering food and drinks in any establishment easy for customers and personnel and to reduce significantly the trips waiters and other personnel have to make in order to serve customers.",
+        "yetty-About-Section-Second-Title": "FR Let's Join <span class='yellow'>a table</span>",
+        "yetty-About-Section-Third-Description":"FR To reserve a table you need to scan the QR first and then you will be able to view the complete menu and reserve the table and avail different offers."
+    },
+    "homePage": {
+		
+	},
+    "menuPage":{
+
+    },
+    "orderpage":{
+
+    }
+}

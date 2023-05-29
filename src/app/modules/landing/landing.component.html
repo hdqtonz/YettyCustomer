@@ -2,8 +2,8 @@
     <div class="row mb-5">
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div>
-                <div class="yetty-heading">Yetty <br> Restaurant App</div>
-                <div class="scan" routerLink="/home">Scan the QR to Continue</div>
+                <div class="yetty-heading" [innerHTML]="'landingPage.yetty-Hero-Section-Title' | translate"></div>
+                <div class="scan" routerLink="/home" [innerHTML]="'landingPage.yetty-Hero-Section-Sub-Title' | translate"></div>
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -13,8 +13,8 @@
 
     <div class="row mb-5">
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="yetty-heading yellow">About yetty</div>
-            <div class="about-yetty">
+            <div class="yetty-heading yellow" [innerHTML]="'landingPage.yetty-About-Section-First-Title' | translate">About yetty</div>
+            <div class="about-yetty" [innerHTML]="'landingPage.yetty-About-Section-First-Description' | translate">
                 Yetty is a digital menu and serving optimization cloud-based web service for restaurants, diners, bars
                 and other kinds of food establishments. It aims to make ordering food and drinks in any establishment
                 easy for customers and personnel and to reduce significantly the trips waiters and other personnel
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-            <div class="about-yetty">
+            <div class="about-yetty" [innerHTML]="'landingPage.yetty-About-Section-Second-Description' | translate">
                 Yetty is a digital menu and serving optimization cloud-based web service for restaurants, diners, bars
                 and other kinds of food establishments. It aims to make ordering food and drinks in any establishment
                 easy for customers and personnel and to reduce significantly the trips waiters and other personnel
@@ -59,11 +59,12 @@
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12 d-flex align-items-center justify-content-center">
                 <div style="max-width: 700px;">
-                    <div class="yetty-heading">Let's Join <span class="yellow">a table</span></div>
+                    <div class="yetty-heading"  >Let's Join <span class="yellow">a table</span></div>
                     <div class="about-yetty">
                         To reserve a table you need to scan the QR first and then you will be able to view the complete menu and
                         reserve the table and avail different offers.
                     </div>
+                    <!-- [innerHTML]="'landingPage.yetty-About-Section-Second-Title' | translate" -->
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     FlexLayoutModule,
     MatCheckboxModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   exports: [
     HeaderComponent,
@@ -25,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     FlexLayoutModule,
     MatCheckboxModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class SharedModule { }

@@ -8,34 +8,15 @@ const routes: Routes = [
   },
 
   {
-    path: 'landing',
+    path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', loadChildren:()=> import('./modules/landing/landing.module').then(m => m.LandingModule)  },
+      { path: 'landing', loadChildren:()=> import('./modules/landing/landing.module').then(m => m.LandingModule)  },
+      { path: 'home', loadChildren:()=> import('./modules/home/home.module').then(m => m.HomeModule)  },
+      { path: 'menu', loadChildren:()=> import('./modules/menu/menu.module').then(m => m.MenuModule)  },
+      { path: 'order', loadChildren:()=> import('./modules/order/order.module').then(m => m.OrderModule)  },
     ]
   },
-  {
-    path: 'home',
-    component: MainLayoutComponent,
-    children: [
-      { path: '', loadChildren:()=> import('./modules/home/home.module').then(m => m.HomeModule)  },
-    ]
-  },
-  {
-    path: 'menu',
-    component: MainLayoutComponent,
-    children: [
-      { path: '', loadChildren:()=> import('./modules/menu/menu.module').then(m => m.MenuModule)  },
-    ]
-  },
-  {
-    path: 'order',
-    component: MainLayoutComponent,
-    children: [
-      { path: '', loadChildren:()=> import('./modules/order/order.module').then(m => m.OrderModule)  },
-    ]
-  },
-  
   { path: '**', pathMatch: 'full', redirectTo: 'landing' }
 ];
 
