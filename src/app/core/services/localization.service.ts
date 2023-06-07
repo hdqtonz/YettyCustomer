@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import englishTranslations from '../../../assets/i18n/en.json';
 
-const LOCALE = 'locale';
+const LOCALE = 'defaultLanguage';
 
 export enum Locale {
   'EN' = 'en',

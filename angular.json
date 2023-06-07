@@ -51,15 +51,48 @@
                   "maximumError": "4kb"
                 }
               ],
+              "fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.prod.ts"
+								}
+							],
               "outputHashing": "all"
             },
+            "uat": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "10mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "10mb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.uat.ts"
+								}
+							],
+							"outputHashing": "all"
+						},
             "development": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -69,6 +102,9 @@
           "configurations": {
             "production": {
               "browserTarget": "yetty-customer:build:production"
+            },
+            "uat": {
+              "browserTarget": "yetty-customer:build:uat"
             },
             "development": {
               "browserTarget": "yetty-customer:build:development"

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalizationService } from './core/services/localization.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,13 @@ export class AppComponent implements OnInit{
   title = 'yetty-customer';
 
   ngOnInit(): void {
+    console.log("Enviroment is ",environment.name)
     this.setLanguage()
   }
 
   setLanguage(){
     this._localizationService.setFromStorage()
   }
+
+
 }

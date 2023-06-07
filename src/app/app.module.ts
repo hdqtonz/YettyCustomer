@@ -9,10 +9,14 @@ import { FooterOnlyLayoutComponent } from './core/layouts/footer-only-layout/foo
 import { SharedModule } from './shared/shared.module';
 import { AppLocalizationInitializationFactory } from './core/initialization/localization/app-localization-initialization.factory';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { AppLocalizationInitializationService } from './core/initialization/localization/app-localization-initialization.service';
 import { AbstractInitializationFactory } from './core/initialization/abstract-initialization.factory';
+import { FormsModule } from '@angular/forms';
+import { HttpInterceptors } from './core/interceptor/http.interceptor';
+import { HttpClientService } from './core/services/http-client.service';
+import { RouteConfig } from './core/config/route.config';
 
 @NgModule({
   declarations: [
@@ -32,9 +36,17 @@ import { AbstractInitializationFactory } from './core/initialization/abstract-in
       },
     }),
     SharedModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:HttpInterceptors,
+      multi:true
+    },
+    HttpClientService,
+    RouteConfig,
     {
       provide: APP_INITIALIZER,
       useFactory: AbstractInitializationFactory.getInitializationFunction,
