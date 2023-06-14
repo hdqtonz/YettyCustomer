@@ -1,6 +1,6 @@
 import { Visitor } from "./Visitor";
 
-export interface Table {
+export interface EstablishmentTable {
     allowYettyAppUsersToJoin: boolean;
     maxSeats:                 number;
     name:                     string;

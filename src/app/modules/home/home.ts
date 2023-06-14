@@ -37,3 +37,7 @@ export interface workingIntervalsDTO {
     from: string
     to: string
 }
+
+export class AddVisitorRequest {
+    name!: string;
+}

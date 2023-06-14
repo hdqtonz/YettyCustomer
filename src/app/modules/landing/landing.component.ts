@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { QrScannerComponent } from 'src/app/core/components/dialog-boxes/qr-scanner/qr-scanner.component';
 import { EstablishmentsSettingDTO } from 'src/app/core/interface/establishment-setting';
 import { EstablishmentsService } from 'src/app/core/services/establishments.service';
@@ -14,6 +15,7 @@ export class LandingComponent implements OnInit{
 
 
   constructor(
+    private _router:Router,
     private _establishmentsService:EstablishmentsService,
     public _dialog: MatDialog){}
   
@@ -40,7 +42,25 @@ export class LandingComponent implements OnInit{
       height: '80%',
       width: '75%',
     });
+
+    dialogRef.afterClosed().subscribe({
+      next:(res)=>{
+        this.navigateTo(`Home`)
+      }
+    })
   }
 
+
+  /**
+   * To navigate other pages
+   * @param path 
+   */
+  navigateTo(path:string){
+    this._router.navigate([path]).then((res)=>{
+      console.log(`Successfully Navigate to ${res}`)
+    }).catch((err)=>{
+      console.log(`Somting went wrong`)
+    })
+  }
 
 }

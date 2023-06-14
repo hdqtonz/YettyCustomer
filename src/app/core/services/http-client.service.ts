@@ -22,7 +22,7 @@ export class HttpClientService {
 	 * @param url
 	 * @param data
 	 */
-	post(url: string, data?: any, headers?: any) {
+	post<T>(url: string, data?: any, headers?: any) {
 		let body = JSON.stringify(data);
 		return this.http.post<any>(this.routeConfig.Url(url), body);
 	}
@@ -32,7 +32,7 @@ export class HttpClientService {
 	 * @param url
 	 * @param data
 	 */
-	put(url: string, data?: any) {
+	put<T>(url: string, data?: any) {
 		let body = JSON.stringify(data);
 		return this.http.put<any>(this.routeConfig.Url(url), body);
 	}
@@ -42,7 +42,7 @@ export class HttpClientService {
 	 * @param url
 	 * @param data
 	 */
-	delete(url: string) {
+	delete<T>(url: string) {
 		return this.http.delete<any>(this.routeConfig.Url(url));
 	}
 }

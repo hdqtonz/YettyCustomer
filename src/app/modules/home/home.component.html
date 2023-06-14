@@ -53,10 +53,10 @@
                     <ul><li>Josh Steyn</li></ul>
                 </div>
                 <div>
-                    <input type="text" class="join-table-input form-input mt-3" placeholder="Enter your name">
+                    <input type="text" [(ngModel)]="customerName" class="join-table-input form-input mt-3" placeholder="Enter your name">
                 </div>
                 <div class="w-100">
-                    <button class="yellow-btn w-100 mt-4" routerLink="/menu">Join Table</button>
+                    <button class="yellow-btn w-100 mt-4" [disabled]="!customerName.length" (click)="addVisitorToTable()">Join Table</button>
                 </div>
             </div>
         </div>
