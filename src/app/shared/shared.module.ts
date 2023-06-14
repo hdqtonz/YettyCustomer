@@ -7,6 +7,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { TranslateModule } from '@ngx-translate/core';
     MatCheckboxModule,
     MatRadioModule,
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    MatDialogModule,
+
   ],
   exports: [
     HeaderComponent,
@@ -28,7 +32,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatCheckboxModule,
     MatRadioModule,
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    MatDialogModule
   ]
 })
 export class SharedModule { }

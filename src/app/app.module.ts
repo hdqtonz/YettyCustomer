@@ -17,6 +17,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpInterceptors } from './core/interceptor/http.interceptor';
 import { HttpClientService } from './core/services/http-client.service';
 import { RouteConfig } from './core/config/route.config';
+import {
+	MatDialog,
+	MatDialogModule,
+	MatDialogRef
+} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +43,8 @@ import { RouteConfig } from './core/config/route.config';
     }),
     SharedModule,
     FormsModule,
-    HttpClientModule
+    MatDialogModule,
+    HttpClientModule,
   ],
   providers: [
     {
@@ -53,6 +60,7 @@ import { RouteConfig } from './core/config/route.config';
       deps: [AppLocalizationInitializationService],
       multi: true,
     },
+    { provide: MatDialogRef, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })

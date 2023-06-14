@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { QrScannerComponent } from 'src/app/core/components/dialog-boxes/qr-scanner/qr-scanner.component';
 import { EstablishmentsSettingDTO } from 'src/app/core/interface/establishment-setting';
 import { EstablishmentsService } from 'src/app/core/services/establishments.service';
 
@@ -10,7 +12,10 @@ import { EstablishmentsService } from 'src/app/core/services/establishments.serv
 export class LandingComponent implements OnInit{
   public EstablishmentsSetting!:EstablishmentsSettingDTO
 
-  constructor(private _establishmentsService:EstablishmentsService){}
+
+  constructor(
+    private _establishmentsService:EstablishmentsService,
+    public _dialog: MatDialog){}
   
 
   ngOnInit(): void {
@@ -26,6 +31,15 @@ export class LandingComponent implements OnInit{
 
       }
     })  
+  }
+
+
+  
+  onOfQrScanner(){  
+    const dialogRef = this._dialog.open(QrScannerComponent, {
+      height: '80%',
+      width: '75%',
+    });
   }
 
 

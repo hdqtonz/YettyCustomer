@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LandingRoutingModule } from './landing-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LandingComponent } from './landing.component';
-
+import { QrScannerModule } from 'src/app/core/components/dialog-boxes/qr-scanner/qr-scanner.module';
 
 
 @NgModule({
@@ -14,7 +14,8 @@ import { LandingComponent } from './landing.component';
   imports: [
     CommonModule,
     LandingRoutingModule,
-    SharedModule
+    SharedModule,
+    QrScannerModule
   ]
 })
 export class LandingModule { }
