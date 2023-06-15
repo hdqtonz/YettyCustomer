@@ -2,13 +2,9 @@
     <div class="container mt-5">
         <div class="row mb-5 mt-5">
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="yetty-heading">Welcome to <br> <span class="yellow">Crazy Potato</span></div>
+                <div class="yetty-heading">Welcome to <br> <span class="yellow">{{ generalInfo?.name ?? "NA" }}</span></div>
                 <div class="about-yetty">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisis ultricies at eleifend proin.
-                    Congue nibh nulla malesuada ultricies nec quam . Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Facilisis ultricies at eleifend proin. Congue nibh nulla malesuada ultricies nec quam.Lorem
-                    ipsum dolor sit amet, consectetur adipiscing elit. Facilisis ultricies at eleifend proin. Congue
-                    nibh nulla malesuada ultricies nec quam
+                    {{ generalInfo?.description ?? "NA" }}
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -44,13 +40,11 @@
         <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
             <div class="table-info">
                 <div class="yetty-heading">
-                    Floor 1 / Table 3
+                    {{ tableInfo?.room ?? "NA" }} / {{ tableInfo?.name ?? "NA" }}
                 </div>
                 <div class="mb-3">Current Table Visitors</div>
-                <div class="visitors">
-                    <ul><li>Mike L</li></ul>
-                    <ul><li>Mark Wood</li></ul>
-                    <ul><li>Josh Steyn</li></ul>
+                <div class="visitors" *ngFor="let visitor of tableInfo?.visitors">
+                    <ul><li> {{ visitor?.name ?? "NA" }} </li></ul>
                 </div>
                 <div>
                     <input type="text" [(ngModel)]="customerName" class="join-table-input form-input mt-3" placeholder="Enter your name">
