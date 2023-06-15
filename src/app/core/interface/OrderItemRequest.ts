@@ -1,5 +1,5 @@
 export interface OrderItemRequest {
-    menuItemId:         string;
-    menuItemSizeId:     string;
-    comment:            string;
+  menuItemId: string;
+  menuItemSizeId: string;
+  comment: string;
 }

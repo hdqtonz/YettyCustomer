@@ -1,4 +1,4 @@
 export interface ServiceCheckItem {
-    percentage: number;
-    amount: number;
+  percentage: number;
+  amount: number;
 }

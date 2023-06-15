@@ -1,8 +1,8 @@
-import { MenuItem } from "./MenuItem";
+import { MenuItem } from './MenuItem';
 
 export interface MenuSectionFullInfo {
-    description: string;
-    id:          string;
-    menuItems:   MenuItem[];
-    name:        string;
+  description: string;
+  id: string;
+  menuItems: MenuItem[];
+  name: string;
 }

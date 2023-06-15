@@ -1,4 +1,4 @@
 export interface Visitor {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }

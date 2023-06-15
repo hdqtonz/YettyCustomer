@@ -10,13 +10,12 @@ export enum Locale {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class LocalizationService {
   private locale$ = new BehaviorSubject<Locale>(Locale.EN);
   locale: Observable<Locale> = this.locale$.asObservable();
-  
+
   constructor(private translateService: TranslateService) {}
 
   setDefaults() {

@@ -1,11 +1,11 @@
-import { MenuItemSize } from "./MenuItemSize"
+import { MenuItemSize } from './MenuItemSize';
 
 export interface MenuItem {
-    id: string;
-    name: string;
-    description: string;
-    photos: string[];
-    sizes: MenuItemSize[];
-    allergens: string[];
-    available: boolean;
+  id: string;
+  name: string;
+  description: string;
+  photos: string[];
+  sizes: MenuItemSize[];
+  allergens: string[];
+  available: boolean;
 }

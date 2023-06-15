@@ -18,18 +18,13 @@ import { HttpInterceptors } from './core/interceptor/http.interceptor';
 import { HttpClientService } from './core/services/http-client.service';
 import { RouteConfig } from './core/config/route.config';
 import {
-	MatDialog,
-	MatDialogModule,
-	MatDialogRef
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
 } from '@angular/material/dialog';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainLayoutComponent,
-    FooterOnlyLayoutComponent,
-  ],
+  declarations: [AppComponent, MainLayoutComponent, FooterOnlyLayoutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,9 +43,9 @@ import {
   ],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:HttpInterceptors,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptors,
+      multi: true,
     },
     HttpClientService,
     RouteConfig,
@@ -60,8 +55,8 @@ import {
       deps: [AppLocalizationInitializationService],
       multi: true,
     },
-    { provide: MatDialogRef, useValue: {} }
+    { provide: MatDialogRef, useValue: {} },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

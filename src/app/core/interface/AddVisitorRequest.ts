@@ -1,3 +1,3 @@
 export interface AddVisitorRequest {
-    name:   string;
+  name: string;
 }

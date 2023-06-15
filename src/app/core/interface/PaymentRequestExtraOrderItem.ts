@@ -1,7 +1,7 @@
 export interface PaymentRequestExtraOrderItem {
-    visitorId: string;
-    visitor: string;
-    orderItemId: string;
-    name: string;
-    price: number;
+  visitorId: string;
+  visitor: string;
+  orderItemId: string;
+  name: string;
+  price: number;
 }

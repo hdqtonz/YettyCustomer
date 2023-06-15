@@ -1,8 +1,8 @@
-import { PaymentTypeEnum } from "../enums/PaymentTypeEnum";
-import { OrderItemPaymentRequest } from "./OrderItemPaymentRequest"
+import { PaymentTypeEnum } from '../enums/PaymentTypeEnum';
+import { OrderItemPaymentRequest } from './OrderItemPaymentRequest';
 
 export interface OrderItemsPaymentRequest {
-    items: OrderItemPaymentRequest[];
-    extraItems: OrderItemPaymentRequest[];
-    type: PaymentTypeEnum
+  items: OrderItemPaymentRequest[];
+  extraItems: OrderItemPaymentRequest[];
+  type: PaymentTypeEnum;
 }

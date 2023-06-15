@@ -1,230 +1,270 @@
 <!-- Toast Notification -->
-<div class="container-fluid" style="background-color: var(--yetty-green);height: 80px;">
-    <div class="container h-100">
-        <div class="--toast-container">
-            <div class="--toast-detail">
-                <div class="--toast-message">Order placed Successfully</div>
-                <div class="--toast-detail">View Order details</div>
-            </div>
-            <div class="--toast-action">
-                <img width="40px" height="40px" src="/assets/images/icons/order-close.svg" alt="close">
-            </div>
-        </div>
+<div
+  class="container-fluid"
+  style="background-color: var(--yetty-green); height: 80px"
+>
+  <div class="container h-100">
+    <div class="--toast-container">
+      <div class="--toast-detail">
+        <div class="--toast-message">Order placed Successfully</div>
+        <div class="--toast-detail">View Order details</div>
+      </div>
+      <div class="--toast-action">
+        <img
+          width="40px"
+          height="40px"
+          src="/assets/images/icons/order-close.svg"
+          alt="close"
+        />
+      </div>
     </div>
+  </div>
 </div>
 
-
 <!-- Order container -->
-<div class="container mt-5 mb-5" style="box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.25);padding: 0;border-radius: 20px;">
-    <div class="order-header mb-5">
-        MY ORDER
+<div
+  class="container mt-5 mb-5"
+  style="
+    box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.25);
+    padding: 0;
+    border-radius: 20px;
+  "
+>
+  <div class="order-header mb-5">MY ORDER</div>
+  <div class="row mt-5 p-4">
+    <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
+      <div class="light-green-bg p-4">
+        <button class="order-type-header">New Order</button>
+        <div class="order-item">
+          <div class="item-name">Spaghetti</div>
+          <div class="item-price">$24.1</div>
+          <div class="item-actions d-flex justify-content-between">
+            <button class="preferance-btn">Preference</button>
+            <button class="remove-btn">Remove</button>
+          </div>
+        </div>
+        <!-- price totals -->
+        <div class="totals mt-5">
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Subtotal</div>
+            <div class="item-price">$78.3</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Tax fee</div>
+            <div class="item-price">$8.3</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Voucher</div>
+            <div class="item-price">$7.0</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Total</div>
+            <div class="item-price">$80.3</div>
+          </div>
+          <button class="send-btn">Send All</button>
+        </div>
+      </div>
     </div>
-    <div class="row mt-5 p-4">
-        <div class="col-lg-3 col-md-6 col-sm-12 mt-4 ">
-            <div class="light-green-bg p-4">
-                <button class="order-type-header">
-                    New Order
-                </button>
-                <div class="order-item">
-                    <div class="item-name">
-                    Spaghetti
-                </div>
-                <div class="item-price">
-                    $24.1
-                </div>
-                <div class="item-actions d-flex justify-content-between">
-                    <button class="preferance-btn">Preference</button>
-                    <button class="remove-btn">Remove</button>
-                </div>
-                </div>
-                <!-- price totals -->
-                <div class="totals mt-5">
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Subtotal</div>
-                        <div class="item-price">$78.3</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Tax fee</div>
-                        <div class="item-price">$8.3</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Voucher</div>
-                        <div class="item-price">$7.0</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Total</div>
-                        <div class="item-price">$80.3</div>
-                    </div>
-                    <button class="send-btn">Send All</button>
-                </div>
-            </div>
+    <!-- Sent Order -->
+    <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
+      <div class="light-green-bg p-4">
+        <button class="order-type-header">Sent Order</button>
+        <div class="order-item">
+          <div class="item-name">
+            <mat-checkbox color="primary"
+              ><span class="check-item">Spaghetti</span></mat-checkbox
+            >
+          </div>
+          <div class="item-price">$24.1</div>
+          <div class="item-actions d-flex justify-content-between">
+            <button class="preferance-btn">Cancel</button>
+          </div>
         </div>
-        <!-- Sent Order -->
-        <div class="col-lg-3 col-md-6 col-sm-12 mt-4 ">
-            <div class="light-green-bg p-4">
-                <button class="order-type-header">
-                    Sent Order
-                </button>
-                <div class="order-item">
-                    <div class="item-name">
-                        <mat-checkbox color="primary" ><span class="check-item">Spaghetti</span></mat-checkbox>
-                    </div>
-                <div class="item-price">
-                    $24.1
-                </div>
-                <div class="item-actions d-flex justify-content-between">
-                    <button class="preferance-btn">Cancel</button>
-                </div>
-                </div>
-                <!-- price totals -->
-                <div class="totals mt-5">
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Subtotal</div>
-                        <div class="item-price">$78.3</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Tax fee</div>
-                        <div class="item-price">$8.3</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Voucher</div>
-                        <div class="item-price">$7.0</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Total</div>
-                        <div class="item-price">$80.3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Confirmed Order -->
-        <div class="col-lg-3 col-md-6 col-sm-12 mt-4 ">
-            <div class="light-green-bg p-4">
-                <button class="order-type-header">
-                    Confirmed Order
-                </button>
-                <div class="order-item">
-                    <div class="item-name">
-                        <mat-checkbox color="primary" ><span class="check-item">Spaghetti</span></mat-checkbox>
-                </div>
-                <div class="item-price">
-                    $24.1
-                </div>
-                <div class="item-actions d-flex justify-content-between">
-                    <button class="preferance-btn">Cancel</button>
-                </div>
-                </div>
-                <!-- price totals -->
-                <div class="totals mt-5">
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Subtotal</div>
-                        <div class="item-price">$78.3</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Tax fee</div>
-                        <div class="item-price">$8.3</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Voucher</div>
-                        <div class="item-price">$7.0</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Total</div>
-                        <div class="item-price">$80.3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Served Order -->
-        <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
-            <div class="light-green-bg p-4">
-                <button class="order-type-header">
-                    Served Order
-                </button>
-                <div class="order-item">
-                    <div class="item-name">
-                        <mat-checkbox color="primary" ><span class="check-item">Spaghetti</span></mat-checkbox>
-                </div>
-                <div class="item-price">
-                    $24.1
-                </div>
-                </div>
-                <!-- price totals -->
-                <div class="totals mt-5">
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Subtotal</div>
-                        <div class="item-price">$78.3</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Tax fee</div>
-                        <div class="item-price">$8.3</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Voucher</div>
-                        <div class="item-price">$7.0</div>
-                    </div>
-                    <div class="subtotal d-flex justify-content-between">
-                        <div class="item-name">Total</div>
-                        <div class="item-price">$80.3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="p-5 transfer-btn-container">
-
-        <button class="send-btn transfer" data-bs-toggle="modal" data-bs-target="#transferOrderModal">Transfer Selected</button>
-    </div>
-
-    <!-- Transfer order 1 / select items -->
-    <div class="modal fade modal-lg" id="transferOrderModal" tabindex="-1" aria-labelledby="transferOrderModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="transferOrderModalLabel">Choose another visitor to transfer the selected items to</h1>
-            </div>
-            <div class="modal-body">
-              <div class="w-50">
-                <select class="form-select" style="height: 50px;">
-                    <option value="0">Select Recipient</option>
-                    <option value="1">Matt</option>
-                    <option value="2">Tony</option>
-                </select>
-              </div>
-              <div class="mt-3 mb-3 select-order" >Select Order Items:</div>
-              <div class="order-items-container" >
-                  <div class="order-items d-flex justify-content-between w-50">
-                      <div class="order-item-name">Pizza x2</div>
-                      <div class="order-item-price">$48</div>
-                    </div>
-                </div>
-                </div>
-            <div class="modal-footer justify-content-start">
-              <button type="button" class="transfer-btn"   data-bs-target="#transferOrderModal2" data-bs-toggle="modal">Transfer</button>
-              <button type="button" class="cancel-btn" data-bs-dismiss="modal">Close</button>
-            </div>
+        <!-- price totals -->
+        <div class="totals mt-5">
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Subtotal</div>
+            <div class="item-price">$78.3</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Tax fee</div>
+            <div class="item-price">$8.3</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Voucher</div>
+            <div class="item-price">$7.0</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Total</div>
+            <div class="item-price">$80.3</div>
           </div>
         </div>
       </div>
-
-      <!-- Transfer order 2 / preference -->
-      <div class="modal fade modal-lg" id="transferOrderModal2" aria-hidden="true" aria-labelledby="transferOrderModalLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="transferOrderModalLabel2">Type Preference or Instruction</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div>
-                <textarea class="form-control" cols="30" rows="10" placeholder="Type any preference of Order..."></textarea>
-              </div>
-            </div>
-            <div class="modal-footer justify-content-start">
-              <button class="transfer-btn">Save</button>
-              <button class="cancel-btn" data-bs-dismiss="modal">Cancel</button>
-            </div>
+    </div>
+    <!-- Confirmed Order -->
+    <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
+      <div class="light-green-bg p-4">
+        <button class="order-type-header">Confirmed Order</button>
+        <div class="order-item">
+          <div class="item-name">
+            <mat-checkbox color="primary"
+              ><span class="check-item">Spaghetti</span></mat-checkbox
+            >
+          </div>
+          <div class="item-price">$24.1</div>
+          <div class="item-actions d-flex justify-content-between">
+            <button class="preferance-btn">Cancel</button>
+          </div>
+        </div>
+        <!-- price totals -->
+        <div class="totals mt-5">
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Subtotal</div>
+            <div class="item-price">$78.3</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Tax fee</div>
+            <div class="item-price">$8.3</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Voucher</div>
+            <div class="item-price">$7.0</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Total</div>
+            <div class="item-price">$80.3</div>
           </div>
         </div>
       </div>
+    </div>
+    <!-- Served Order -->
+    <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
+      <div class="light-green-bg p-4">
+        <button class="order-type-header">Served Order</button>
+        <div class="order-item">
+          <div class="item-name">
+            <mat-checkbox color="primary"
+              ><span class="check-item">Spaghetti</span></mat-checkbox
+            >
+          </div>
+          <div class="item-price">$24.1</div>
+        </div>
+        <!-- price totals -->
+        <div class="totals mt-5">
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Subtotal</div>
+            <div class="item-price">$78.3</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Tax fee</div>
+            <div class="item-price">$8.3</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Voucher</div>
+            <div class="item-price">$7.0</div>
+          </div>
+          <div class="subtotal d-flex justify-content-between">
+            <div class="item-name">Total</div>
+            <div class="item-price">$80.3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-5 transfer-btn-container">
+    <button
+      class="send-btn transfer"
+      data-bs-toggle="modal"
+      data-bs-target="#transferOrderModal"
+    >
+      Transfer Selected
+    </button>
+  </div>
+
+  <!-- Transfer order 1 / select items -->
+  <div
+    class="modal fade modal-lg"
+    id="transferOrderModal"
+    tabindex="-1"
+    aria-labelledby="transferOrderModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="transferOrderModalLabel">
+            Choose another visitor to transfer the selected items to
+          </h1>
+        </div>
+        <div class="modal-body">
+          <div class="w-50">
+            <select class="form-select" style="height: 50px">
+              <option value="0">Select Recipient</option>
+              <option value="1">Matt</option>
+              <option value="2">Tony</option>
+            </select>
+          </div>
+          <div class="mt-3 mb-3 select-order">Select Order Items:</div>
+          <div class="order-items-container">
+            <div class="order-items d-flex justify-content-between w-50">
+              <div class="order-item-name">Pizza x2</div>
+              <div class="order-item-price">$48</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-start">
+          <button
+            type="button"
+            class="transfer-btn"
+            data-bs-target="#transferOrderModal2"
+            data-bs-toggle="modal"
+          >
+            Transfer
+          </button>
+          <button type="button" class="cancel-btn" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transfer order 2 / preference -->
+  <div
+    class="modal fade modal-lg"
+    id="transferOrderModal2"
+    aria-hidden="true"
+    aria-labelledby="transferOrderModalLabel2"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="transferOrderModalLabel2">
+            Type Preference or Instruction
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <textarea
+              class="form-control"
+              cols="30"
+              rows="10"
+              placeholder="Type any preference of Order..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-start">
+          <button class="transfer-btn">Save</button>
+          <button class="cancel-btn" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -4,12 +4,13 @@ import { LandingComponent } from './landing.component';
 
 const routes: Routes = [
   {
-    path:'',component:LandingComponent
-  }
+    path: '',
+    component: LandingComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class LandingRoutingModule { }
+export class LandingRoutingModule {}

@@ -1,10 +1,7 @@
-import { PayPalSettings } from "./PayPalSettings";
-import { RevolutSettings } from "./RevolutSettings";
+import { PayPalSettings } from './PayPalSettings';
+import { RevolutSettings } from './RevolutSettings';
 
 export interface PaymentMethodsSettings {
-    payPalSettings: PayPalSettings;
-    revolutSettings: RevolutSettings;
+  payPalSettings: PayPalSettings;
+  revolutSettings: RevolutSettings;
 }
-
-
-

@@ -1,4 +1,4 @@
 export interface TransferRequestExtraOrderItem {
-    name: string;
-    price: number;
+  name: string;
+  price: number;
 }

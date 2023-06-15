@@ -1,5 +1,5 @@
-import { Section } from "./MenuSection";
+import { Section } from './MenuSection';
 
 export interface MenuSections {
-    sections: Section[];
+  sections: Section[];
 }

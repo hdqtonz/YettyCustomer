@@ -1,188 +1,185 @@
+.change-view-detail {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+}
 
-.change-view-detail{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 20px;
-    border: 1px solid gainsboro;
-    border-radius: 10px;
-  }
-  
-  .dish-type{
-    position: relative;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 45px;
-    color: var(--yetty-black);
-  }
-  
-  .dish-type::before{
-    content: "";
-    width: 100px;
-    height: 2px;
-    background-color: var(--yetty-yellow);
-    position: absolute;
-    bottom: 0px;
-  }
-  
-  .menu-item-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #fafafa;
-    border-radius: 40px;
-    padding: 27px;
-    position: relative;
-  }
-  
-  .menu-item-img{
-    width: 180px;
-    height: 180px;
-  }
-  
-  .menu-item-name{
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 40px;
-    color: var(--yetty-black);
-  }
-  
-  .menu-item-price{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .price{
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--yetty-black);
-  }
-  
-  .menu-item-size {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .size {
-    background: gainsboro;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .size-selected {
-    background-color: var(--yetty-yellow);
-    color: #fff;
-  }
-  
-  .not-available{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    background: var(--yetty-yellow);
-    width: 130px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    color: #fff;
-    font-weight: 500;
-  }
-  
-  .unavailable{
-    position: absolute;
-    background: rgba(0, 0, 0, 0.7);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 35px;
-  }
-  
-  .no-pointer{
-    pointer-events: none;
-  }
-  
-  //Tile style
-  .tile-menu-item-container{
-    position: relative;
-    display: flex;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s;
-  }
-  
-  .tile-menu-item-container div{
-    cursor: pointer;
-  }
-  
-  .tile-menu-item-container:hover{
-    transform: scale(1.03);
-  }
-  
-  .tile-menu-item-img{
-    padding: 10px 35px;
-    align-items: center;
-    display: flex;
-  
-  }
-  
-  .tile-menu-item-img img{
-    width: 180px;
-    height: 180px;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .tile-menu-item-detail{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 15px;
-  }
-  
-  .tile-menu-item-name{
-    color: var(--yetty-black);
-    font-size: 24px;
-    font-weight: 500;
-  }
-  
-  .tile-menu-item-text{
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 27px;
-    max-width: 570px;
-    color: var(--yetty-black);
-  
-  }
-  
-  .tile-menu-item-add{
-    margin-left: 15px;
-  }
-  
-  .add-btn{
-    color: #fff;
-    border: none;
-    outline: none;
-    border-radius: 30px;
-    padding: 5px 30px;
-    background-color: var(--yetty-yellow);
-    transition: transform 0.3s;
-  }
-  
-  .add-btn:hover{
-    transform: scale(1.1);
-  }
+.dish-type {
+  position: relative;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  color: var(--yetty-black);
+}
+
+.dish-type::before {
+  content: "";
+  width: 100px;
+  height: 2px;
+  background-color: var(--yetty-yellow);
+  position: absolute;
+  bottom: 0px;
+}
+
+.menu-item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 40px;
+  padding: 27px;
+  position: relative;
+}
+
+.menu-item-img {
+  width: 180px;
+  height: 180px;
+}
+
+.menu-item-name {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 40px;
+  color: var(--yetty-black);
+}
+
+.menu-item-price {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--yetty-black);
+}
+
+.menu-item-size {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.size {
+  background: gainsboro;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.size-selected {
+  background-color: var(--yetty-yellow);
+  color: #fff;
+}
+
+.not-available {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--yetty-yellow);
+  width: 130px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.unavailable {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 35px;
+}
+
+.no-pointer {
+  pointer-events: none;
+}
+
+//Tile style
+.tile-menu-item-container {
+  position: relative;
+  display: flex;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.tile-menu-item-container div {
+  cursor: pointer;
+}
+
+.tile-menu-item-container:hover {
+  transform: scale(1.03);
+}
+
+.tile-menu-item-img {
+  padding: 10px 35px;
+  align-items: center;
+  display: flex;
+}
+
+.tile-menu-item-img img {
+  width: 180px;
+  height: 180px;
+  max-width: 100%;
+  height: auto;
+}
+
+.tile-menu-item-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+}
+
+.tile-menu-item-name {
+  color: var(--yetty-black);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.tile-menu-item-text {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  max-width: 570px;
+  color: var(--yetty-black);
+}
+
+.tile-menu-item-add {
+  margin-left: 15px;
+}
+
+.add-btn {
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  padding: 5px 30px;
+  background-color: var(--yetty-yellow);
+  transition: transform 0.3s;
+}
+
+.add-btn:hover {
+  transform: scale(1.1);
+}

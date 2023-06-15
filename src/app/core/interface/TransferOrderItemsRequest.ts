@@ -1,5 +1,5 @@
 export interface TransferOrderItemsRequest {
-    visitorId: string;
-    orderItemIds: string[];
-    extraOrderItemIds: string[];
+  visitorId: string;
+  orderItemIds: string[];
+  extraOrderItemIds: string[];
 }

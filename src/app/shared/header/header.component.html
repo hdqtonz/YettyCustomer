@@ -1,47 +1,73 @@
 <div class="container-fluid nav-address d-flex">
-    <div class="container d-flex align-items-center w-100">3247 Johnson Ave, Bronx, NY 10463, Amerika Serikat</div>
+  <div class="container d-flex align-items-center w-100">
+    3247 Johnson Ave, Bronx, NY 10463, Amerika Serikat
+  </div>
 </div>
 
 <div class="container">
-    <div class="nav-container" fxLayout="row" fxLayoutAlign="space-between center" >
-        <div class="logo-container">
-            <img class="logo" src="/assets/images/yetty-logo.png" alt="Yetty">
-        </div>
-        <div class="actions-container" fxLayout="row" fxLayoutAlign="end center" fxFlex="75">
-            <ng-container *ngIf="true">
-                <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="80">                    
-                    <div class="request-btn" fxFlex="20">
-                        <button class="green-round-btn" data-bs-target="#requestService" data-bs-toggle="modal">Request Service</button>
-                    </div>
-                    <div class="leave-btn"  fxFlex="20">
-                    <button class="green-round-btn">Leave Table</button>
-                </div>
-                <div class="bng" fxFlex="20">
-                    <select class="form-control dropdown-height">
-                        <option value="1">BNG</option>
-                    </select>
-                </div>
-            </div>
-            </ng-container>
-            <div class="language " fxFlex="20" >
-                <select (change)="onLanguageChange($event)" class="form-select dropdown-height">
-                    <option *ngFor="let item of languages" [value]="item.Value">{{item.Name}}</option>
-                </select>
-            </div>
-        </div>
+  <div
+    class="nav-container"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+  >
+    <div class="logo-container">
+      <img class="logo" src="/assets/images/yetty-logo.png" alt="Yetty" />
     </div>
-
-    <!-- Request service modal -->
-    <div class="modal fade modal-lg" id="requestService" tabindex="-1" aria-labelledby="requestServiceLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-body text-center">
-                <div class="mb-5 mt-2 request-header">
-                    Request Service
-                </div>
-                <button class="call-waiter-btn">Call Waiter</button>
-                </div>
+    <div
+      class="actions-container"
+      fxLayout="row"
+      fxLayoutAlign="end center"
+      fxFlex="75"
+    >
+      <ng-container *ngIf="true">
+        <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="80">
+          <div class="request-btn" fxFlex="20">
+            <button
+              class="green-round-btn"
+              data-bs-target="#requestService"
+              data-bs-toggle="modal"
+            >
+              Request Service
+            </button>
+          </div>
+          <div class="leave-btn" fxFlex="20">
+            <button class="green-round-btn">Leave Table</button>
+          </div>
+          <div class="bng" fxFlex="20">
+            <select class="form-control dropdown-height">
+              <option value="1">BNG</option>
+            </select>
           </div>
         </div>
+      </ng-container>
+      <div class="language" fxFlex="20">
+        <select
+          (change)="onLanguageChange($event)"
+          class="form-select dropdown-height"
+        >
+          <option *ngFor="let item of languages" [value]="item.Value">
+            {{ item.Name }}
+          </option>
+        </select>
       </div>
+    </div>
+  </div>
+
+  <!-- Request service modal -->
+  <div
+    class="modal fade modal-lg"
+    id="requestService"
+    tabindex="-1"
+    aria-labelledby="requestServiceLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <div class="mb-5 mt-2 request-header">Request Service</div>
+          <button class="call-waiter-btn">Call Waiter</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

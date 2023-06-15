@@ -8,19 +8,13 @@ import { CheckComponent } from './check/check.component';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import { MenuDetailComponent } from './menu-detail/menu-detail.component';
 
-
-
 @NgModule({
   declarations: [
     ManuComponent,
     CheckComponent,
     MenuItemsComponent,
-    MenuDetailComponent
+    MenuDetailComponent,
   ],
-  imports: [
-    CommonModule,
-    MenuRoutingModule,
-    SharedModule
-  ]
+  imports: [CommonModule, MenuRoutingModule, SharedModule],
 })
-export class MenuModule { }
+export class MenuModule {}

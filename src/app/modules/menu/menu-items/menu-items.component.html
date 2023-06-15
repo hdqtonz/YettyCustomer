@@ -1,129 +1,206 @@
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-2 col-md-2 col-sm-4 col-6">
-            <ul class="ks-cboxtags">
-                <li><input type="checkbox" id="dinner" value="all"><label for="dinner">Dinner</label></li>
-            </ul>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-4 col-6">
-            <ul class="ks-cboxtags">
-                <li><input type="checkbox" id="lunch" value="all"><label for="lunch">Lunch</label></li>
-            </ul>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-4 col-6">
-            <ul class="ks-cboxtags">
-                <li><input type="checkbox" id="dessert" value="all"><label for="dessert">Dessert</label></li>
-            </ul>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-4 col-6">
-            <ul class="ks-cboxtags">
-                <li><input type="checkbox" id="drink" value="all"><label for="drink">drink</label></li>
-            </ul>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+      <ul class="ks-cboxtags">
+        <li>
+          <input type="checkbox" id="dinner" value="all" /><label for="dinner"
+            >Dinner</label
+          >
+        </li>
+      </ul>
     </div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+      <ul class="ks-cboxtags">
+        <li>
+          <input type="checkbox" id="lunch" value="all" /><label for="lunch"
+            >Lunch</label
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+      <ul class="ks-cboxtags">
+        <li>
+          <input type="checkbox" id="dessert" value="all" /><label for="dessert"
+            >Dessert</label
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+      <ul class="ks-cboxtags">
+        <li>
+          <input type="checkbox" id="drink" value="all" /><label for="drink"
+            >drink</label
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <div class="container mt-5">
-    <div class="change-view-container">
-        <div class="change-view-detail">
-            <div>1 to 5 of 50 Agents</div>
-            <div class="d-flex align-items-center">
-                <div class="tile-view" (click)="menuType='tile'" style="cursor: pointer;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_190_1063)">
-                    <path d="M0 0V4.8H24V0H0ZM0 9.6V14.4H24V9.6H0ZM0 19.2V24H24V19.2H0Z" fill="#000"/>
-                    </g>
-                    <defs>
-                    <clipPath id="clip0_190_1063">
-                    <rect width="24" height="24" fill="white"/>
-                    </clipPath>
-                    </defs>
-                    </svg>
-                </div>
-                <div class="grid-view mt-2" style="margin-left: 10px;cursor: pointer;" (click)="menuType='grid'">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g filter="url(#filter0_d_190_1062)">
-                        <path d="M28 24H22V18H28V24ZM19 24H13V18H19V24ZM10 24H4V18H10V24ZM28 15H22V9H28V15ZM19 15H13V9H19V15ZM10 15H4V9H10V15ZM28 6H22V0H28V6ZM19 6H13V0H19V6ZM10 6H4V0H10V6Z" fill="#000"/>
-                        </g>
-                        <defs>
-                        <filter id="filter0_d_190_1062" x="0" y="0" width="32" height="32" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                        <feOffset dy="4"/>
-                        <feGaussianBlur stdDeviation="2"/>
-                        <feComposite in2="hardAlpha" operator="out"/>
-                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_190_1062"/>
-                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_190_1062" result="shape"/>
-                        </filter>
-                        </defs>
-                        </svg>
-                </div>
-            </div>
+  <div class="change-view-container">
+    <div class="change-view-detail">
+      <div>1 to 5 of 50 Agents</div>
+      <div class="d-flex align-items-center">
+        <div
+          class="tile-view"
+          (click)="menuType = 'tile'"
+          style="cursor: pointer"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_190_1063)">
+              <path
+                d="M0 0V4.8H24V0H0ZM0 9.6V14.4H24V9.6H0ZM0 19.2V24H24V19.2H0Z"
+                fill="#000"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_190_1063">
+                <rect width="24" height="24" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
         </div>
+        <div
+          class="grid-view mt-2"
+          style="margin-left: 10px; cursor: pointer"
+          (click)="menuType = 'grid'"
+        >
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g filter="url(#filter0_d_190_1062)">
+              <path
+                d="M28 24H22V18H28V24ZM19 24H13V18H19V24ZM10 24H4V18H10V24ZM28 15H22V9H28V15ZM19 15H13V9H19V15ZM10 15H4V9H10V15ZM28 6H22V0H28V6ZM19 6H13V0H19V6ZM10 6H4V0H10V6Z"
+                fill="#000"
+              />
+            </g>
+            <defs>
+              <filter
+                id="filter0_d_190_1062"
+                x="0"
+                y="0"
+                width="32"
+                height="32"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  result="hardAlpha"
+                />
+                <feOffset dy="4" />
+                <feGaussianBlur stdDeviation="2" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                />
+                <feBlend
+                  mode="normal"
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_190_1062"
+                />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_190_1062"
+                  result="shape"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="container mt-5 mb-5">
-    <div class="dish-type  mt-5">
-        PASTA
-    </div>
-    <div class="dish-type-description">
-        Fresh and home-made Italian pasta
-    </div>
-    <!-- Grid view -->
-    <ng-container *ngIf="menuType=='grid'">
-        <div class="row mt-5 mb-5">
-            <div class="col-lg-3 col-md-4 col-sm-6 mt-4" *ngFor="let menu of menuItems" routerLink="/menu/detail">
-                <div class="menu-item-container" [ngClass]="{'gridUnavailable': menu.available==false}">
-                    <div >
-                        <img class="img-fluid menu-item-img" src="{{menu.imgUrl}}" alt="{{menu.name}}">
-                    </div>
-                <div class="menu-item-name mt-3 mb-3">{{menu.name}}</div>
-                <div class="menu-item-detail text-center">{{menu.detail}}</div>
-                <div class="menu-item-size">
-                    <div class="size">S</div>
-                    <div class="size">M</div>
-                    <div class="size size-selected">L</div>
-                </div>
-                <div class="menu-item-price mt-4">
-                    <div class="price">${{menu.price}}</div>
-                    <div class="menu-item-add">
-                        <button class="add-btn">Add</button>
-                    </div>
-                </div>
-                <div class="unavailable" *ngIf="menu.available==false">
-                    <div class="not-available">Not Available</div>
-                </div>
+  <div class="dish-type mt-5">PASTA</div>
+  <div class="dish-type-description">Fresh and home-made Italian pasta</div>
+  <!-- Grid view -->
+  <ng-container *ngIf="menuType == 'grid'">
+    <div class="row mt-5 mb-5">
+      <div
+        class="col-lg-3 col-md-4 col-sm-6 mt-4"
+        *ngFor="let menu of menuItems"
+        routerLink="/menu/detail"
+      >
+        <div
+          class="menu-item-container"
+          [ngClass]="{ gridUnavailable: menu.available == false }"
+        >
+          <div>
+            <img
+              class="img-fluid menu-item-img"
+              src="{{ menu.imgUrl }}"
+              alt="{{ menu.name }}"
+            />
+          </div>
+          <div class="menu-item-name mt-3 mb-3">{{ menu.name }}</div>
+          <div class="menu-item-detail text-center">{{ menu.detail }}</div>
+          <div class="menu-item-size">
+            <div class="size">S</div>
+            <div class="size">M</div>
+            <div class="size size-selected">L</div>
+          </div>
+          <div class="menu-item-price mt-4">
+            <div class="price">${{ menu.price }}</div>
+            <div class="menu-item-add">
+              <button class="add-btn">Add</button>
             </div>
+          </div>
+          <div class="unavailable" *ngIf="menu.available == false">
+            <div class="not-available">Not Available</div>
+          </div>
         </div>
+      </div>
     </div>
-</ng-container>
+  </ng-container>
 
-    <!-- Tile View -->
-    <ng-container *ngIf="menuType=='tile'">
-        <div class="tile-menu-item-container mb-4" *ngFor="let menu of menuItems" routerLink="/menu-detail">
-            <div class="tile-menu-item-img">
-                <img  src="{{menu.imgUrl}}" alt="{{menu.name}}">
-            </div>
-            <div class="tile-menu-item-detail">
-                <div class="tile-menu-item-name mb-3">
-                    {{menu.name}}
-                </div>
-                <div class="tile-menu-item-text mb-3">
-                    {{menu.detail}}
-                </div>
-                <div class="tile-menu-item-price d-flex align-items-center">
-                    <div class="price ">${{menu.price}}</div>
-                    <div class="tile-menu-item-add ">
-                        <button class="add-btn">Add</button>
-                    </div>
-                </div>
-            </div>
-            <div class="unavailable" *ngIf="menu.available==false">
-                <div class="not-available">Not Available</div>
-            </div>
+  <!-- Tile View -->
+  <ng-container *ngIf="menuType == 'tile'">
+    <div
+      class="tile-menu-item-container mb-4"
+      *ngFor="let menu of menuItems"
+      routerLink="/menu-detail"
+    >
+      <div class="tile-menu-item-img">
+        <img src="{{ menu.imgUrl }}" alt="{{ menu.name }}" />
+      </div>
+      <div class="tile-menu-item-detail">
+        <div class="tile-menu-item-name mb-3">
+          {{ menu.name }}
         </div>
-    </ng-container>
-    
-
+        <div class="tile-menu-item-text mb-3">
+          {{ menu.detail }}
+        </div>
+        <div class="tile-menu-item-price d-flex align-items-center">
+          <div class="price">${{ menu.price }}</div>
+          <div class="tile-menu-item-add">
+            <button class="add-btn">Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="unavailable" *ngIf="menu.available == false">
+        <div class="not-available">Not Available</div>
+      </div>
+    </div>
+  </ng-container>
 </div>

@@ -7,33 +7,32 @@ import { MenuDetailComponent } from './menu-detail/menu-detail.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:ManuComponent,
-    children:[
+    path: '',
+    component: ManuComponent,
+    children: [
       {
-        path:'',
-        redirectTo:'menu-items',
-        pathMatch:'full'
+        path: '',
+        redirectTo: 'menu-items',
+        pathMatch: 'full',
       },
       {
-        path:'menu-items',
-        component:MenuItemsComponent
+        path: 'menu-items',
+        component: MenuItemsComponent,
       },
       {
-        path:'check',
-        component:CheckComponent
+        path: 'check',
+        component: CheckComponent,
       },
       {
-        path:'detail',
-        component:MenuDetailComponent
-      }
-    ]
-
-  }
+        path: 'detail',
+        component: MenuDetailComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MenuRoutingModule { }
+export class MenuRoutingModule {}

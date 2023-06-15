@@ -8,59 +8,53 @@ import { EstablishmentsService } from 'src/app/core/services/establishments.serv
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  styleUrls: ['./landing.component.scss'],
 })
-export class LandingComponent implements OnInit{
-  public EstablishmentsSetting!:EstablishmentsSettingDTO
-
+export class LandingComponent implements OnInit {
+  public EstablishmentsSetting!: EstablishmentsSettingDTO;
 
   constructor(
-    private _router:Router,
-    private _establishmentsService:EstablishmentsService,
-    public _dialog: MatDialog){}
-  
+    private _router: Router,
+    private _establishmentsService: EstablishmentsService,
+    public _dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this._establishmentsService.getEstablishmentsData().subscribe({
-      next:(data:any)=>{
-        this.EstablishmentsSetting = data
-        console.log(this.EstablishmentsSetting, 'EstablishmentsSetting')
+      next: (data: any) => {
+        this.EstablishmentsSetting = data;
+        console.log(this.EstablishmentsSetting, 'EstablishmentsSetting');
       },
-      error:(e)=>{
-
-      },
-      complete:()=>{
-
-      }
-    })  
+      error: (e) => {},
+      complete: () => {},
+    });
   }
 
-
-  
-  onOfQrScanner(){  
+  onOfQrScanner() {
     const dialogRef = this._dialog.open(QrScannerComponent, {
       height: '80%',
       width: '75%',
     });
 
     dialogRef.afterClosed().subscribe({
-      next:(res)=>{
-        this.navigateTo(`Home`)
-      }
-    })
+      next: (res) => {
+        this.navigateTo(`Home`);
+      },
+    });
   }
-
 
   /**
    * To navigate other pages
-   * @param path 
+   * @param path
    */
-  navigateTo(path:string){
-    this._router.navigate([path]).then((res)=>{
-      console.log(`Successfully Navigate to ${res}`)
-    }).catch((err)=>{
-      console.log(`Somting went wrong`)
-    })
+  navigateTo(path: string) {
+    this._router
+      .navigate([path])
+      .then((res) => {
+        console.log(`Successfully Navigate to ${res}`);
+      })
+      .catch((err) => {
+        console.log(`Somting went wrong`);
+      });
   }
-
 }

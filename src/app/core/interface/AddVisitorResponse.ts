@@ -1,3 +1,3 @@
 export interface AddVisitorResponse {
-    id: string;
+  id: string;
 }

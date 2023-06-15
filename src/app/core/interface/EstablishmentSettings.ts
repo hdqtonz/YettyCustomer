@@ -1,5 +1,5 @@
 export interface EstablishmentSettings {
-    baseCurrency:             string;
-    defaultLanguage:          string;
-    restrictAccessByLocation: boolean;
+  baseCurrency: string;
+  defaultLanguage: string;
+  restrictAccessByLocation: boolean;
 }

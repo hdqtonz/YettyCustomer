@@ -1,4 +1,4 @@
 export interface PaymentRequestResult {
-    success: boolean;
-    paymentSettings: string;
+  success: boolean;
+  paymentSettings: string;
 }

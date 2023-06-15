@@ -5,13 +5,12 @@ import { MenuSections } from '../interface/MenuSections';
 import { MenuSectionFullInfo } from '../interface/MenuSectionFullInfo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MenuService {
+  constructor(private _http: HttpClientService) {}
 
-  constructor(private _http:HttpClientService) { }
-
-  getEstablishmentMenuSections(){
-    return this._http.get<MenuSections>(`${Api._getEstablishmentMenuSections}`)
+  getEstablishmentMenuSections() {
+    return this._http.get<MenuSections>(`${Api._getEstablishmentMenuSections}`);
   }
 }

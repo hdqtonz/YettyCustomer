@@ -1,17 +1,20 @@
-<div class="container-fluid p-4 mb-5" style="background-color: #ECF9F066;">
-    <div class="container mt-5">
-        <div class="row mb-5 mt-5">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="yetty-heading">Welcome to <br> <span class="yellow">{{ generalInfo?.name ?? "NA" }}</span></div>
-                <div class="about-yetty">
-                    {{ generalInfo?.description ?? "NA" }}
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <img class="img-fluid" src="/assets/images/spghetti.png" alt="Yetty">
-            </div>
+<div class="container-fluid p-4 mb-5" style="background-color: #ecf9f066">
+  <div class="container mt-5">
+    <div class="row mb-5 mt-5">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="yetty-heading">
+          Welcome to <br />
+          <span class="yellow">{{ generalInfo?.name ?? "NA" }}</span>
         </div>
+        <div class="about-yetty">
+          {{ generalInfo?.description ?? "NA" }}
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <img class="img-fluid" src="/assets/images/spghetti.png" alt="Yetty" />
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- <div class="container mt-5 mb-5">
@@ -36,30 +39,49 @@
 </div> -->
 
 <div class="container-fluid mb-5">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
-            <div class="table-info">
-                <div class="yetty-heading">
-                    {{ tableInfo?.room ?? "NA" }} / {{ tableInfo?.name ?? "NA" }}
-                </div>
-                <div class="mb-3">Current Table Visitors</div>
-                <div class="visitors" *ngFor="let visitor of tableInfo?.visitors">
-                    <ul><li> {{ visitor?.name ?? "NA" }} </li></ul>
-                </div>
-                <div>
-                    <input type="text" [(ngModel)]="customerName" class="join-table-input form-input mt-3" placeholder="Enter your name">
-                </div>
-                <div class="w-100">
-                    <button class="yellow-btn w-100 mt-4" [disabled]="!customerName.length" (click)="addVisitorToTable()">Join Table</button>
-                </div>
-            </div>
+  <div class="row">
+    <div
+      class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center"
+    >
+      <div class="table-info">
+        <div class="yetty-heading">
+          {{ tableInfo?.room ?? "NA" }} / {{ tableInfo?.name ?? "NA" }}
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 p-0">
-            <div >
-                <img class="img-fluid join-table-img mt-5" src="/assets/images/join-table.png" alt="Yetty">
-            </div>
+        <div class="mb-3">Current Table Visitors</div>
+        <div class="visitors" *ngFor="let visitor of tableInfo?.visitors">
+          <ul>
+            <li>{{ visitor?.name ?? "NA" }}</li>
+          </ul>
         </div>
+        <div>
+          <input
+            type="text"
+            [(ngModel)]="customerName"
+            class="join-table-input form-input mt-3"
+            placeholder="Enter your name"
+          />
+        </div>
+        <div class="w-100">
+          <button
+            class="yellow-btn w-100 mt-4"
+            [disabled]="!customerName.length"
+            (click)="addVisitorToTable()"
+          >
+            Join Table
+          </button>
+        </div>
+      </div>
     </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+      <div>
+        <img
+          class="img-fluid join-table-img mt-5"
+          src="/assets/images/join-table.png"
+          alt="Yetty"
+        />
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- <div class="container mt-5 mb-5">
@@ -87,13 +109,17 @@
 </div> -->
 
 <div class="container mt-5 mb-5 text-center">
-    <div class="time-bg">
-        <img class="d-block img-fluid" src="/assets/images/timing-bg.png" alt="Yetty">
-        <div class="time-table w-100">
-            <div class="time-heading">We are open from</div>
-            <div class="time-days">Monday-Sunday</div>
-            <div class="time">Lunch: Mon-Sun : 11:00 AM - 02:00 PM</div>
-            <div class="time">Dinner: Mon-Sun : 4:00 PM - 09:00 PM</div>
-        </div>
+  <div class="time-bg">
+    <img
+      class="d-block img-fluid"
+      src="/assets/images/timing-bg.png"
+      alt="Yetty"
+    />
+    <div class="time-table w-100">
+      <div class="time-heading">We are open from</div>
+      <div class="time-days">Monday-Sunday</div>
+      <div class="time">Lunch: Mon-Sun : 11:00 AM - 02:00 PM</div>
+      <div class="time">Dinner: Mon-Sun : 4:00 PM - 09:00 PM</div>
     </div>
+  </div>
 </div>

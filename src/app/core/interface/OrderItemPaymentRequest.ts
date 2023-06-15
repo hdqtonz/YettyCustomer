@@ -1,4 +1,4 @@
 export interface OrderItemPaymentRequest {
-    visitorId: string;
-    orderItemId: string;
+  visitorId: string;
+  orderItemId: string;
 }
