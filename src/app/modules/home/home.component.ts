@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.customerName.length , 'length check')
     this.getEstblishmentsGeneralInfo();
     
     this.getEstablishmentsTableInfo();
