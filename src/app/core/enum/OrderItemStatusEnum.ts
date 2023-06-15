@@ -1,8 +1,8 @@
 export enum OrderItemStatusEnum {
-  ADDED,
-  SENT,
-  CONFIRMED,
-  DECLINED,
-  SERVED,
-  CANCELED,
+  ADDED = 'ADDED',
+  SENT = 'SENT',
+  CONFIRMED = 'CONFIRMED',
+  DECLINED = 'DECLINED',
+  SERVED = 'SERVED',
+  CANCELED = 'CANCELED',
 }

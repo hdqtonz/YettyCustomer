@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { MenuService } from 'src/app/core/services/menu.service';
 
 @Component({
   selector: 'app-menu-items',
@@ -9,15 +8,7 @@ import { MenuService } from 'src/app/core/services/menu.service';
   styleUrls: ['./menu-items.component.scss'],
 })
 export class MenuItemsComponent {
-  constructor(private _router: Router, private _menuService: MenuService) {}
-
-  gOnInit(): void {
-    this._menuService.getEstablishmentMenuSections().subscribe({
-      next: (data: any) => {},
-      error: (e) => {},
-      complete: () => {},
-    });
-  }
+  constructor(private _router: Router) {}
 
   menuType: string = 'grid' || 'tile';
   menuItems = [

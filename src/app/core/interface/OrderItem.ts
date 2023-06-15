@@ -1,6 +1,3 @@
-import { OrderItemPaymentStatusEnum } from '../enums/OrderItemPaymentStatusEnum';
-import { OrderItemStatusEnum } from '../enums/OrderItemStatusEnum';
-
 export interface OrderItem {
   id: string;
   visitorId: string;
@@ -12,6 +9,6 @@ export interface OrderItem {
   quantity: number;
   price: number;
   comment: string;
-  status: OrderItemStatusEnum;
-  paymentStatus: OrderItemPaymentStatusEnum;
+  status: string;
+  paymentStatus: string;
 }
