@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Establishment } from 'src/app/core/interface/Establishment';
+import { AccountService } from 'src/app/core/services/account.service';
 import { LocalizationService } from 'src/app/core/services/localization.service';
 
 @Component({
@@ -7,20 +10,29 @@ import { LocalizationService } from 'src/app/core/services/localization.service'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  public establishmentInfo!: Establishment | null;
+  public isEstablishmentInfo: boolean = false;
   public languages: any = [
     {
       Name: 'English',
       Value: 'en',
     },
-    {
-      Name: 'Franch',
-      Value: 'fr',
-    },
   ];
 
-  constructor(private _localizationService: LocalizationService) {}
+  constructor(
+    private _router: Router,
+    private _localizationService: LocalizationService,
+    private _accountService: AccountService,
+    private _cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._accountService.currentEstablishmentInfo.subscribe((details) => {
+      this.isEstablishmentInfo = true;
+      this.establishmentInfo = details;
+      this._cdr.detectChanges();
+    });
+  }
 
   onLanguageChange(event: any) {
     let lang = event.target.value;

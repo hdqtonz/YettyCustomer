@@ -1,6 +1,9 @@
-<div class="container-fluid nav-address d-flex">
+<div
+  *ngIf="establishmentInfo?.address?.length && isEstablishmentInfo"
+  class="container-fluid nav-address d-flex"
+>
   <div class="container d-flex align-items-center w-100">
-    3247 Johnson Ave, Bronx, NY 10463, Amerika Serikat
+    {{ establishmentInfo?.address ? establishmentInfo?.address : "NA" }}
   </div>
 </div>
 

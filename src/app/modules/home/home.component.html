@@ -4,10 +4,12 @@
       <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="yetty-heading">
           Welcome to <br />
-          <span class="yellow">{{ generalInfo?.name ?? "NA" }}</span>
+          <span class="yellow">{{
+            generalInfo?.name ? generalInfo?.name : "NA"
+          }}</span>
         </div>
         <div class="about-yetty">
-          {{ generalInfo?.description ?? "NA" }}
+          {{ generalInfo?.description ? generalInfo?.description : "NA" }}
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12">
@@ -45,12 +47,13 @@
     >
       <div class="table-info">
         <div class="yetty-heading">
-          {{ tableInfo?.room ?? "NA" }} / {{ tableInfo?.name ?? "NA" }}
+          {{ tableInfo?.room ? tableInfo?.room : "NA" }} /
+          {{ tableInfo?.name ? tableInfo?.name : "NA" }}
         </div>
         <div class="mb-3">Current Table Visitors</div>
         <div class="visitors" *ngFor="let visitor of tableInfo?.visitors">
           <ul>
-            <li>{{ visitor?.name ?? "NA" }}</li>
+            <li>{{ visitor?.name ? visitor?.name : "NA" }}</li>
           </ul>
         </div>
         <div>

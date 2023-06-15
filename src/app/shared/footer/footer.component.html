@@ -1,71 +1,90 @@
-<div class="container-fluid order-header-container" routerLinkActive="orderActive">
-    <div class="container h-100">
-        <div class="order-header d-flex justify-content-between align-items-center h-100" routerLink="/order" >
-            <div class="order-count">MY ORDER</div>
-            <div class="arrow-up"><img src="/assets/images/icons/arrow-up.svg" alt="Up"></div>
-        </div>
-       
+<div
+  class="container-fluid order-header-container"
+  routerLinkActive="orderActive"
+>
+  <div class="container h-100">
+    <div
+      class="order-header d-flex justify-content-between align-items-center h-100"
+      routerLink="/order"
+    >
+      <div class="order-count">MY ORDER</div>
+      <div class="arrow-up">
+        <img src="/assets/images/icons/arrow-up.svg" alt="Up" />
+      </div>
     </div>
-    
+  </div>
 </div>
-<div class="container-fluid p-5" style="background-color: var(--yetty-black);">
-    <div class="container">
-        <div class="row">
-        <div class="col-lg-3">
-            <div class="footer-logo">
-                <img src="/assets/images/footer-logo.png" alt="Yetty">
-            </div>
-            <div class="footer-text footer-item">
-                Viverra gravida morbi egestas facilisis tortor netus non duis tempor. 
-            </div>
-            <div class="social-container d-flex justify-content-evenly">
-                <div class="social">
-                    <img src="/assets/images/icons/twitter.png" alt="">
-                </div>
-                <div class="social">
-                    <img src="/assets/images/icons/instagram.png" alt="">
-                </div>
-                <div class="social">
-                    <img src="/assets/images/icons/facebook.png" alt="">
-                </div>
-            </div>
+<div class="container-fluid p-5" style="background-color: var(--yetty-black)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="footer-logo">
+          <img src="/assets/images/footer-logo.png" alt="Yetty" />
         </div>
-        <div class="col-lg-2">
-            <div class="footer-title">
-                Information
-            </div>
-            <div class="footer-item">Contact Us</div>
-            <div class="footer-item">Join a Table</div>
+        <div class="footer-text footer-item">
+          Viverra gravida morbi egestas facilisis tortor netus non duis tempor.
         </div>
-        <div class="col-lg-3">
-            <div class="footer-title">
-                Links
-            </div>
-            <div class="footer-item">Faqs</div>
-            <div class="footer-item">Terms & Conditions</div>
+        <div class="social-container d-flex justify-content-evenly">
+          <div class="social">
+            <img src="/assets/images/icons/twitter.png" alt="" />
+          </div>
+          <div class="social">
+            <img src="/assets/images/icons/instagram.png" alt="" />
+          </div>
+          <div class="social">
+            <img src="/assets/images/icons/facebook.png" alt="" />
+          </div>
         </div>
-        <div class="col-lg-3">
-            <div class="footer-title">
-                Get in touch
-            </div>
-            <!-- <div class="footer-item">3247 Johnson Ave, Bronx, NY 10463, Amerika Serikat</div>
-            <div class="footer-item">delizioso@gmail.com</div>
-            <div class="footer-item">+123 4567 8901</div> -->
-            <div class="footer-item">Home</div>
-            <div class="footer-item">Contact Us</div>
-            <div class="social-container d-flex">
-                <div class="social me-3">
-                    <img src="/assets/images/icons/twitter.png" alt="">
-                </div>
-                <div class="social mx-3">
-                    <img src="/assets/images/icons/instagram.png" alt="">
-                </div>
-                <div class="social ms-3">
-                    <img src="/assets/images/icons/facebook.png" alt="">
-                </div>
-            </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="footer-title">Information</div>
+        <div class="footer-item">Contact Us</div>
+        <div class="footer-item">Join a Table</div>
+      </div>
+      <div class="col-lg-3">
+        <div class="footer-title">Links</div>
+        <div class="footer-item">Faqs</div>
+        <div class="footer-item">Terms & Conditions</div>
+      </div>
+
+      <div *ngIf="isEstablishmentInfo && establishmentInfo" class="col-lg-3">
+        <div class="footer-title">Get in touch</div>
+        <div class="footer-item">
+          {{ establishmentInfo?.address ? establishmentInfo?.address : "NA" }}
         </div>
+        <div
+          class="footer-item"
+          *ngFor="let email of establishmentInfo?.emails"
+        >
+          {{ email }}
         </div>
-        <div class="text-center footer-item mt-4">Copyright &copy; 2022 Delizioso</div>
+        <div
+          class="footer-item"
+          *ngFor="let phone of establishmentInfo?.phones"
+        >
+          {{ phone }}
+        </div>
+        <div class="footer-item" (click)="navigateTo(AppRoute.Home)">Home</div>
+        <div class="footer-item">Contact Us</div>
+        <div class="social-container d-flex">
+          <div *ngIf="establishmentInfo?.twitterAccount" class="social me-3">
+            <a [href]="establishmentInfo?.twitterAccount">
+              <img src="/assets/images/icons/twitter.png" alt="" />
+            </a>
+          </div>
+          <div *ngIf="false" class="social mx-3">
+            <img src="/assets/images/icons/instagram.png" alt="" />
+          </div>
+          <div *ngIf="establishmentInfo?.facebookPage" class="social ms-3">
+            <a [href]="establishmentInfo?.facebookPage">
+              <img src="/assets/images/icons/facebook.png" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="text-center footer-item mt-4">
+      Copyright &copy; 2022 Delizioso
+    </div>
+  </div>
 </div>

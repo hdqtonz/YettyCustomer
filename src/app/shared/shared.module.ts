@@ -3,18 +3,15 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-  ],
+  declarations: [HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -23,7 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     TranslateModule,
     MatDialogModule,
-
+    MatSnackBarModule,
   ],
   exports: [
     HeaderComponent,
@@ -33,7 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatRadioModule,
     FormsModule,
     TranslateModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+    MatSnackBarModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

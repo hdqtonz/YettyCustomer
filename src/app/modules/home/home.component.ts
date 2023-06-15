@@ -5,6 +5,8 @@ import { EstablishmentsService } from 'src/app/core/services/establishments.serv
 import { AddVisitorRequest } from './home';
 import { Router } from '@angular/router';
 import { AddVisitorResponse } from 'src/app/core/interface/AddVisitorResponse';
+import { AccountService } from 'src/app/core/services/account.service';
+import { AppRoute } from 'src/app/core/class/app-route';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +15,22 @@ import { AddVisitorResponse } from 'src/app/core/interface/AddVisitorResponse';
 })
 export class HomeComponent implements OnInit {
   // Data Variables
-  public generalInfo!: Establishment;
-  public tableInfo!: EstablishmentTable;
-  public visitorsId!: AddVisitorResponse;
+  public generalInfo!: Establishment | null;
+  public tableInfo!: EstablishmentTable | null;
+  public visitorsId!: AddVisitorResponse | null;
 
   // Input Feild Variables
   public customerName: string = 'Customer';
 
   constructor(
+    private _accountService: AccountService,
     private _estblishmentsService: EstablishmentsService,
     private _router: Router
-  ) {}
+  ) {
+    if (!this._accountService.establishmentInfo) {
+      this.navigateTo(AppRoute.Landing);
+    }
+  }
 
   ngOnInit(): void {
     this.getEstblishmentsGeneralInfo();
@@ -35,7 +42,7 @@ export class HomeComponent implements OnInit {
    * Get Estblishments General Info
    */
   getEstblishmentsGeneralInfo() {
-    this._estblishmentsService.getEstblishmentsGeneralInfo().subscribe({
+    this._accountService.currentEstablishmentInfo.subscribe({
       next: (res: Establishment) => {
         this.generalInfo = res;
         console.log(this.generalInfo, 'generalInfo');
@@ -101,10 +108,12 @@ export class HomeComponent implements OnInit {
     this._router
       .navigate([path])
       .then((res) => {
-        console.log(`Successfully Navigate to ${res}`);
+        if (res) {
+          console.log(`Successfully Navigate to ${path}`);
+        }
       })
       .catch((err) => {
-        console.log(err?.message);
+        console.log(`Somting went wrong`);
       });
   }
 }
