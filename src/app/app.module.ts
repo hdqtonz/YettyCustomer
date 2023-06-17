@@ -22,6 +22,7 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 @NgModule({
   declarations: [AppComponent, MainLayoutComponent, FooterOnlyLayoutComponent],
@@ -40,6 +41,7 @@ import {
     FormsModule,
     MatDialogModule,
     HttpClientModule,
+    NgxScannerQrcodeModule
   ],
   providers: [
     {
