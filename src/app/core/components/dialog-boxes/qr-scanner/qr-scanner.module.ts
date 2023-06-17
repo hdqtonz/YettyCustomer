@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QrScannerComponent } from './qr-scanner.component';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 @NgModule({
   declarations: [
@@ -10,8 +10,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   imports: [
     CommonModule,
-    ZXingScannerModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxScannerQrcodeModule
   ]
 })
 export class QrScannerModule { }
