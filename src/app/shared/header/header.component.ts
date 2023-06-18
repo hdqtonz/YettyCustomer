@@ -10,6 +10,7 @@ import { CommonService } from 'src/app/core/services/common.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { LocalizationService } from 'src/app/core/services/localization.service';
 import { Languages } from 'src/app/core/enum/languages';
+import { AppRoute } from '../../core/class/app-route';
 
 @Component({
   selector: 'app-header',
@@ -119,6 +120,27 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       next: (response) => {
         this.showMessage('Successfully canceled Service On you Table');
         this.getServiceRequestedStatus();
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.showError(err.errorMessage);
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  removeVisitorFromTable() {
+    this.isLoading = true;
+    this._commonService.removeVisitorFromTable().subscribe({
+      next: (response) => {
+        this.showMessage('Visitor removed successfully');
+        this._localStorageService.removeKey(LocalStorage.TABLE_ID);
+        this._localStorageService.removeKey(LocalStorage.VISITOR_ID);
+        this._router.navigate([AppRoute.Home])
+
         this.isLoading = false;
       },
       error: (err) => {

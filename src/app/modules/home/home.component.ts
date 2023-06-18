@@ -165,6 +165,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
+  /**
+   * Get Images
+   * @param image
+   * @returns
+   */
   getImage(image: string) {
     return this._imagePath.getImage(image);
   }

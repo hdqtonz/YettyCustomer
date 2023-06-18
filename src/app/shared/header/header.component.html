@@ -38,7 +38,7 @@
             </button>
           </div>
           <div *ngIf="IsVisitorAvailialbe" class="leave-btn" fxFlex="20">
-            <button class="green-round-btn">Leave Table</button>
+            <button class="green-round-btn" (click)="removeVisitorFromTable()">Leave Table</button>
           </div>
           <div class="bng" fxFlex="20">
             <select

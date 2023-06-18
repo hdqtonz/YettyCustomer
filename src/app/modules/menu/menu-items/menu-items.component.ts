@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../../core/class/base-component';
+import { ImagePath } from '../../../core/config/imagepth.config';
+import { MealSizeEnum } from '../../../core/enum/MealSizeEnum';
 import { MenuSectionFullInfo } from '../../../core/interface/MenuSectionFullInfo';
 import { MenuSections } from '../../../core/interface/MenuSections';
 import { EstablishmentsService } from '../../../core/services/establishments.service';
@@ -13,15 +15,18 @@ import { EstablishmentsService } from '../../../core/services/establishments.ser
   styleUrls: ['./menu-items.component.scss'],
 })
 export class MenuItemsComponent extends BaseComponent implements OnInit {
+  //other variable
+  mealSize = MealSizeEnum
 
   // Data variable
   public menuSection!: MenuSections;
-  public menuSectionInfo!: MenuSectionFullInfo;
+  public menuSectionInfo: MenuSectionFullInfo[] = [];
 
   constructor(
     private _matSnackBar: MatSnackBar,
     private _router: Router,
     private _estblishmentsService: EstablishmentsService,
+    private _imagePath: ImagePath
   ) {
     super(_matSnackBar);
     this.getEstblishmentsMenuSections();
@@ -54,22 +59,37 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
 
   checkValue(menuSectionId: string | undefined) {
     console.log(menuSectionId);
-    this._estblishmentsService.getEstablishmentMenuSectionItems(menuSectionId ?? '').subscribe({
-      next: (res: MenuSectionFullInfo) => {
-        this.menuSectionInfo = res;
-        console.log(this.menuSectionInfo);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.showError(err?.errorMessage);
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    })
+    if (this.menuSectionInfo && this.menuSectionInfo.filter(x => x.id == menuSectionId).length > 0) {
+      this.menuSectionInfo = this.menuSectionInfo.filter(x => x.id != menuSectionId);
+    }
+    else {
+      this._estblishmentsService.getEstablishmentMenuSectionItems(menuSectionId ?? '').subscribe({
+        next: (res: MenuSectionFullInfo) => {
+          this.menuSectionInfo.push(res);
+          console.log(this.menuSectionInfo);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.showError(err?.errorMessage);
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
-  menuItems = [
+  /**
+  * Get Images
+  * @param image
+  * @returns
+  */
+  getImage(image: string) {
+    return this._imagePath.getImage(image);
+  }
+
+
+  /*menuItems = [
     {
       id: 0,
       name: 'Spaghetti',
@@ -128,5 +148,5 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
       detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
       price: '12.05',
     },
-  ];
+  ];*/
 }
