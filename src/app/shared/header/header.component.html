@@ -24,7 +24,7 @@
     >
       <ng-container *ngIf="true">
         <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="80">
-          <div class="request-btn" fxFlex="20">
+          <div *ngIf="IsVisitorAvailialbe" class="request-btn" fxFlex="20">
             <button
               class="green-round-btn"
               data-bs-target="#requestService"
@@ -33,12 +33,28 @@
               Request Service
             </button>
           </div>
-          <div class="leave-btn" fxFlex="20">
+          <div *ngIf="IsVisitorAvailialbe" class="leave-btn" fxFlex="20">
             <button class="green-round-btn">Leave Table</button>
           </div>
           <div class="bng" fxFlex="20">
-            <select class="form-control dropdown-height">
-              <option value="1">BNG</option>
+            <select
+              (change)="onBaseCurrencyChange($event)"
+              class="form-control dropdown-height"
+            >
+              <option
+                [selected]="baseCurrency"
+                *ngFor="let item of establishmentInfo?.supportedCurrencies"
+                [value]="item.code"
+              >
+                {{ item.name }}
+              </option>
+
+              <option
+                *ngIf="!establishmentInfo?.supportedCurrencies?.length"
+                value="EUR"
+              >
+                EUR
+              </option>
             </select>
           </div>
         </div>
@@ -48,8 +64,18 @@
           (change)="onLanguageChange($event)"
           class="form-select dropdown-height"
         >
-          <option *ngFor="let item of languages" [value]="item.Value">
-            {{ item.Name }}
+          <option
+            *ngFor="let item of establishmentInfo?.supportedLanguages"
+            [value]="item.code"
+            [selected]="defaultLanguage == item.code ? item.code : 'en'"
+          >
+            {{ item.name }}
+          </option>
+          <option
+            *ngIf="!establishmentInfo?.supportedLanguages?.length"
+            [value]="'en'"
+          >
+            English
           </option>
         </select>
       </div>
@@ -68,7 +94,29 @@
       <div class="modal-content">
         <div class="modal-body text-center">
           <div class="mb-5 mt-2 request-header">Request Service</div>
-          <button class="call-waiter-btn">Call Waiter</button>
+          <h6 class="mb-5" *ngIf="serviceRequested?.requested">
+            Already Requested
+          </h6>
+          <button
+            (click)="requestServiceOnTable()"
+            *ngIf="!serviceRequested?.requested"
+            class="call-waiter-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#requestService"
+            data-bs-dismiss="modal"
+          >
+            Call Waiter
+          </button>
+          <button
+            (click)="cancelServiceRequestOnTable()"
+            *ngIf="serviceRequested?.requested"
+            class="call-waiter-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#requestService"
+            data-bs-dismiss="modal"
+          >
+            Cancel Request
+          </button>
         </div>
       </div>
     </div>

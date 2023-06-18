@@ -121,8 +121,14 @@
     <div class="time-table w-100">
       <div class="time-heading">We are open from</div>
       <div class="time-days">Monday-Sunday</div>
-      <div class="time">Lunch: Mon-Sun : 11:00 AM - 02:00 PM</div>
-      <div class="time">Dinner: Mon-Sun : 4:00 PM - 09:00 PM</div>
+      <!-- <div class="time">Lunch: Mon-Sun : 11:00 AM - 02:00 PM</div> -->
+      <div class="time" *ngFor="let item of generalInfo?.workingHours">
+        {{ workingDaysEnum[item.day] }}
+        <span *ngFor="let time of item.workingIntervals">
+          {{ time.from }} - {{ time.to }}
+        </span>
+      </div>
+      <!-- <div class="time">Dinner: Mon-Sun : 4:00 PM - 09:00 PM</div> -->
     </div>
   </div>
 </div>

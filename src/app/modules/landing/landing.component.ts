@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoute } from 'src/app/core/class/app-route';
 import { BaseComponent } from 'src/app/core/class/base-component';
+import { LocalStorage } from 'src/app/core/class/local-storage';
 import { QrScannerComponent } from 'src/app/core/components/dialog-boxes/qr-scanner/qr-scanner.component';
 import { Establishment } from 'src/app/core/interface/Establishment';
 import { EstablishmentSettings } from 'src/app/core/interface/EstablishmentSettings';
 import { EstablishmentsSettingDTO } from 'src/app/core/interface/establishment-setting';
 import { AccountService } from 'src/app/core/services/account.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-landing',
@@ -16,18 +18,40 @@ import { AccountService } from 'src/app/core/services/account.service';
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent extends BaseComponent implements OnInit {
-  public EstablishmentsSetting!: EstablishmentsSettingDTO;
+  public establishmentsSetting!: EstablishmentsSettingDTO;
+  public establishmentId!: string;
+  public tableId!: string;
 
   constructor(
     private _matSnackBar: MatSnackBar,
     private _router: Router,
     private _accountService: AccountService,
-    public _dialog: MatDialog
+    private _localStorageService: LocalStorageService,
+    public _dialog: MatDialog,
+    private _route: ActivatedRoute
   ) {
     super(_matSnackBar);
+
+    this._route.params.subscribe((params: any) => {
+      this.establishmentId = params.eId;
+    });
+
+    this._route.queryParamMap.subscribe((queryParams) => {
+      this.tableId = queryParams.get('table') || '';
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.establishmentId?.length && this.tableId?.length) {
+      this._localStorageService.setItem(
+        LocalStorage.ESTABLISHMENT_ID,
+        this.establishmentId
+      );
+      this._localStorageService.setItem(LocalStorage.TABLE_ID, this.tableId);
+
+      this.getEstblishmmentsSetting();
+    }
+  }
 
   onOfQrScanner() {
     const dialogRef = this._dialog.open(QrScannerComponent, {
@@ -56,7 +80,7 @@ export class LandingComponent extends BaseComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.showError(err?.message);
+        this.showError(err?.errorMessage);
       },
       complete: () => {
         this.isLoading = false;
@@ -78,7 +102,7 @@ export class LandingComponent extends BaseComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.showError(err?.message);
+        this.showError(err?.errorMessage);
       },
       complete: () => {
         this.isLoading = false;
@@ -95,11 +119,18 @@ export class LandingComponent extends BaseComponent implements OnInit {
       .navigate([path])
       .then((res) => {
         if (res) {
-          console.log(`Successfully Navigate to ${path}`);
+          this.scrollToTop();
         }
       })
       .catch((err) => {
         console.log(`Somting went wrong`);
       });
+  }
+
+  /**
+   * To Scroll at Top
+   */
+  scrollToTop() {
+    window.scrollTo(0, 0);
   }
 }

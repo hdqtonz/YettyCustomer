@@ -1,25 +1,25 @@
 export class serviceAPIEndpoints {
-
   /**
-   * tags: Service
+   * tags: Service (Get)
    * summary: Returns if a service (waiter) has been requested by a table visitor
    * @type {string}
    */
-  static _isServiceRequestedOnTable: string = "establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service";
-
+  static _isServiceRequestedOnTable: string =
+    'establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service';
 
   /**
-   * tags: Service
+   * tags: Service (Post)
    * summary: Requests service for a table visitor
    * @type {string}
    */
-  static _requestServiceOnTable: string = "establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service";
-
+  static _requestServiceOnTable: string =
+    'establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service';
 
   /**
-   * tags: Service
+   * tags: Service (Delete)
    * summary: Cancels a service request for a table visitor
    * @type {string}
    */
-  static _cancelServiceRequestOnTable: string = "establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service";
+  static _cancelServiceRequestOnTable: string =
+    'establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service';
 }

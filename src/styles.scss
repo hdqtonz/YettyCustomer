@@ -11,28 +11,28 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-// $YettyCustomer-primary: mat.define-palette(mat.$indigo-palette);
-// $YettyCustomer-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$YettyCustomer-primary: mat.define-palette(mat.$indigo-palette);
+$YettyCustomer-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-// $YettyCustomer-warn: mat.define-palette(mat.$red-palette);
+$YettyCustomer-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-// $YettyCustomer-theme: mat.define-light-theme(
-//   (
-//     color: (
-//       primary: $YettyCustomer-primary,
-//       accent: $YettyCustomer-accent,
-//       warn: $YettyCustomer-warn,
-//     ),
-//   )
-// );
+$YettyCustomer-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $YettyCustomer-primary,
+      accent: $YettyCustomer-accent,
+      warn: $YettyCustomer-warn,
+    ),
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-// @include mat.all-component-themes($YettyCustomer-theme);
+@include mat.all-component-themes($YettyCustomer-theme);
 
 /* You can add global styles to this file, and also import other style files */
 @import "/src/assets/scss/utilities";
@@ -81,6 +81,7 @@ body {
 
 .red-snackbar {
   background: var(--yetty-red);
+  --mdc-snackbar-container-color: var(--yetty-red);
   color: var(--yetty-text-white);
   opacity: 0.7;
 }
@@ -88,6 +89,7 @@ body {
 .green-snackbar {
   background: var(--yetty-green);
   color: var(--yetty-text-white);
+  --mdc-snackbar-container-color: var(--yetty-green);
   opacity: 0.7;
 }
 

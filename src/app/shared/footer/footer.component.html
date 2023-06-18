@@ -50,7 +50,7 @@
       <div *ngIf="isEstablishmentInfo && establishmentInfo" class="col-lg-3">
         <div class="footer-title">Get in touch</div>
         <div class="footer-item">
-          {{ establishmentInfo?.address ? establishmentInfo?.address : "NA" }}
+          {{ establishmentInfo.address }}
         </div>
         <div
           class="footer-item"
@@ -68,7 +68,7 @@
         <div class="footer-item">Contact Us</div>
         <div class="social-container d-flex">
           <div *ngIf="establishmentInfo?.twitterAccount" class="social me-3">
-            <a [href]="establishmentInfo?.twitterAccount">
+            <a [href]="establishmentInfo.twitterAccount">
               <img src="/assets/images/icons/twitter.png" alt="" />
             </a>
           </div>
@@ -76,7 +76,7 @@
             <img src="/assets/images/icons/instagram.png" alt="" />
           </div>
           <div *ngIf="establishmentInfo?.facebookPage" class="social ms-3">
-            <a [href]="establishmentInfo?.facebookPage">
+            <a [href]="establishmentInfo.facebookPage">
               <img src="/assets/images/icons/facebook.png" alt="" />
             </a>
           </div>

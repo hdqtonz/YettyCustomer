@@ -24,11 +24,13 @@ export class FooterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._accountService.currentEstablishmentInfo.subscribe((details) => {
-      this.isEstablishmentInfo = true;
-      this.establishmentInfo = details;
-      this._cdr.detectChanges();
-    });
+    this._accountService.currentEstablishmentInfo.subscribe(
+      (details: Establishment) => {
+        this.isEstablishmentInfo = true;
+        this.establishmentInfo = details;
+        this._cdr.detectChanges();
+      }
+    );
   }
 
   /**

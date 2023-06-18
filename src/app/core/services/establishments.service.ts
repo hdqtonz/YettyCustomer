@@ -13,19 +13,6 @@ import { AddVisitorRequest } from 'src/app/modules/home/home';
 export class EstablishmentsService {
   constructor(private _http: HttpClientService) {}
 
-  // /** Home service start */
-  // getEstablishmentsData() {
-  //   return this._http.get<EstablishmentSettings>(
-  //     `${Api._getEstablishmentsSetting}`
-  //   );
-  // }
-
-  // getEstblishmentsGeneralInfo() {
-  //   return this._http.get<Establishment>(
-  //     `${Api._getEstablishmentsGeneralInfo}`
-  //   );
-  // }
-
   getEstablishmentsTableInfo(tableId: string) {
     return this._http.get<EstablishmentTable>(
       `${Api._getEstablishmentsTableInfo}/${tableId}`

@@ -8,8 +8,15 @@ import { Api } from '../class/api';
 export class CommonService {
   constructor(private _http: HttpClientService) {}
 
-  // Todo
-  // getEstablishmentsData(){
-  //   return this._http.get(`${Api._getEstablishmentsSettingTest}`)
-  // }
+  getServiceRequestedStatus() {
+    return this._http.get<any>(`${Api._isServiceRequestedOnTable}`);
+  }
+
+  requestServiceOnTable() {
+    return this._http.post<any>(`${Api._requestServiceOnTable}`, {});
+  }
+
+  cancelServiceRequestOnTable() {
+    return this._http.delete<any>(`${Api._cancelServiceRequestOnTable}`);
+  }
 }
