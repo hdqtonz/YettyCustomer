@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from './http-client.service';
 import { Api } from '../class/api';
+import { tableAPIEndpoints } from '../class/endpoints/tables';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +19,9 @@ export class CommonService {
 
   cancelServiceRequestOnTable() {
     return this._http.delete<any>(`${Api._cancelServiceRequestOnTable}`);
+  }
+
+  removeVisitorFromTable() {
+    return this._http.delete<any>(`${tableAPIEndpoints._removeVisitorFromTable}`);
   }
 }

@@ -12,8 +12,14 @@ export class AppRoute {
   static Landing: string = `landing`;
 
   /**
-   * Routing path for Manu page
+   * Routing path for Menu page
    * @type {string}
    */
   static Menu: string = `menu`;
+
+  /**
+   * Routing path for Order page
+   * @type {string}
+   */
+  static Order: string = `order`;
 }
