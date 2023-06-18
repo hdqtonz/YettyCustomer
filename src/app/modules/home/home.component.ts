@@ -28,7 +28,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   public visitors!: AddVisitorResponse | null;
   public TableId!: string;
 
-  // Input Feild Variables
+  // Input Field Variables
   public customerName: string = 'Customer ';
 
   constructor(

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from './http-client.service';
-import { Api } from '../class/api';
-import { Establishment } from '../interface/Establishment';
-import { EstablishmentSettings } from '../interface/EstablishmentSettings';
-import { EstablishmentTable } from '../interface/Table';
-import { AddVisitorResponse } from '../interface/AddVisitorResponse';
 import { AddVisitorRequest } from 'src/app/modules/home/home';
+import { Api } from '../class/api';
+import { establishmentAPIEndpoints } from '../class/endpoints/establishments';
+import { AddVisitorResponse } from '../interface/AddVisitorResponse';
+import { MenuSectionFullInfo } from '../interface/MenuSectionFullInfo';
+import { MenuSections } from '../interface/MenuSections';
+import { EstablishmentTable } from '../interface/Table';
+import { HttpClientService } from './http-client.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,18 @@ export class EstablishmentsService {
     return this._http.post<AddVisitorResponse>(
       `${Api._addVisitorToTable}/${tableId}/visitors`,
       reqBody
+    );
+  }
+
+  getEstablishmentMenuSections() {
+    return this._http.get<MenuSections>(
+      `${establishmentAPIEndpoints._getEstablishmentMenuSections}`
+    );
+  }
+
+  getEstablishmentMenuSectionItems(menuSectionId: string) {
+    return this._http.get<MenuSectionFullInfo>(
+      `${establishmentAPIEndpoints._getEstablishmentMenuSectionItems}/${menuSectionId}`
     );
   }
 

@@ -1,15 +1,14 @@
 <div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+  <div class="d-flex justify-content-between">
+    <div *ngFor="let menu of menuSection.sections">
       <ul class="ks-cboxtags">
         <li>
-          <input type="checkbox" id="dinner" value="all" /><label for="dinner"
-            >Dinner</label
-          >
+          <input type="checkbox" [id]="menu?.name" [value]="menu?.id" (change)="checkValue(menu?.id)"/>
+          <label [for]="menu?.name"> {{menu?.name}} </label>
         </li>
       </ul>
     </div>
-    <div class="col-lg-2 col-md-2 col-sm-4 col-6">
+    <!--<div class="col-lg-2 col-md-2 col-sm-4 col-6">
       <ul class="ks-cboxtags">
         <li>
           <input type="checkbox" id="lunch" value="all" /><label for="lunch"
@@ -35,7 +34,7 @@
           >
         </li>
       </ul>
-    </div>
+    </div>-->
   </div>
 </div>
 
