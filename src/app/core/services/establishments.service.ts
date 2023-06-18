@@ -7,6 +7,7 @@ import { MenuSectionFullInfo } from '../interface/MenuSectionFullInfo';
 import { MenuSections } from '../interface/MenuSections';
 import { EstablishmentTable } from '../interface/Table';
 import { HttpClientService } from './http-client.service';
+import { CustomHttpParams } from '../class/customParams';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,10 @@ export class EstablishmentsService {
 
   getEstablishmentMenuSectionItems(menuSectionId: string) {
     return this._http.get<MenuSectionFullInfo>(
-      `${establishmentAPIEndpoints._getEstablishmentMenuSectionItems}/${menuSectionId}`
+      `${establishmentAPIEndpoints._getEstablishmentMenuSectionItems}/${menuSectionId}`,
+      {
+        params: new CustomHttpParams(true),
+      }
     );
   }
 

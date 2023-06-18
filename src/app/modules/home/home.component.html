@@ -13,7 +13,18 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12">
-        <img class="img-fluid" src="/assets/images/spghetti.png" alt="Yetty" />
+        <img
+          *ngIf="!generalInfo?.photos?.length"
+          class="img-fluid"
+          src="/assets/images/spghetti.png"
+          alt="Yetty"
+        />
+        <img
+          *ngIf="generalInfo?.photos?.length"
+          class="img-fluid"
+          [src]="getImage(generalInfo.photos[0])"
+          alt="Yetty"
+        />
       </div>
     </div>
   </div>
@@ -78,10 +89,17 @@
     <div class="col-lg-6 col-md-6 col-sm-12 p-0">
       <div>
         <img
+          *ngIf="generalInfo?.photos?.length"
           class="img-fluid join-table-img mt-5"
           src="/assets/images/join-table.png"
           alt="Yetty"
         />
+        <!-- <img
+          *ngIf="generalInfo?.photos?.length"
+          [src]="getImage(generalInfo.photos[1])"
+          class="img-fluid join-table-img mt-5"
+          alt="Yetty"
+        /> -->
       </div>
     </div>
   </div>

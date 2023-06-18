@@ -12,8 +12,8 @@ export class HttpClientService {
    * Make http GET request
    * @param url
    */
-  get<T>(url: string, headers?: any) {
-    return this.http.get<T>(this.routeConfig.Url(url));
+  get<T>(url: string, headers?: object) {
+    return this.http.get<T>(this.routeConfig.Url(url), headers);
   }
 
   /**
@@ -21,9 +21,9 @@ export class HttpClientService {
    * @param url
    * @param data
    */
-  post<T>(url: string, data?: any, headers?: any) {
+  post<T>(url: string, data?: any, headers?: object) {
     let body = JSON.stringify(data);
-    return this.http.post<any>(this.routeConfig.Url(url), body);
+    return this.http.post<any>(this.routeConfig.Url(url), body, headers);
   }
 
   /**
@@ -31,9 +31,9 @@ export class HttpClientService {
    * @param url
    * @param data
    */
-  put<T>(url: string, data?: any) {
+  put<T>(url: string, data?: any, headers?: object) {
     let body = JSON.stringify(data);
-    return this.http.put<any>(this.routeConfig.Url(url), body);
+    return this.http.put<any>(this.routeConfig.Url(url), body, headers);
   }
 
   /**
@@ -41,7 +41,7 @@ export class HttpClientService {
    * @param url
    * @param data
    */
-  delete<T>(url: string) {
-    return this.http.delete<any>(this.routeConfig.Url(url));
+  delete<T>(url: string, headers?: object) {
+    return this.http.delete<any>(this.routeConfig.Url(url), headers);
   }
 }

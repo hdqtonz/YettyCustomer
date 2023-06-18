@@ -13,7 +13,7 @@ import { LocalizationService } from 'src/app/core/services/localization.service'
 export class FooterComponent implements OnInit {
   AppRoute = AppRoute;
 
-  public establishmentInfo!: Establishment | null;
+  public establishmentInfo!: Establishment;
   public isEstablishmentInfo: boolean = false;
 
   constructor(

@@ -19,14 +19,14 @@ import { Languages } from 'src/app/core/enum/languages';
 export class HeaderComponent extends BaseComponent implements OnInit {
   languages = Languages;
 
-  public establishmentInfo!: Establishment | null;
+  public establishmentInfo!: Establishment;
   public isEstablishmentInfo: boolean = false;
   public IsVisitorAvailialbe: boolean = false;
 
-  public selectedType!: string | null;
+  public selectedType!: string;
 
-  public baseCurrency!: string | null;
-  public defaultLanguage!: string | null;
+  public baseCurrency!: string;
+  public defaultLanguage!: string;
 
   public serviceRequested!: ServiceRequested;
 

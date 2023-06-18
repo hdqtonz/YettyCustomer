@@ -12,6 +12,7 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 import { LocalStorage } from 'src/app/core/class/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from 'src/app/core/class/base-component';
+import { ImagePath } from 'src/app/core/config/imagepth.config';
 
 @Component({
   selector: 'app-home',
@@ -23,9 +24,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
   workingDaysEnum = WorkingDaysEnum;
 
   // Data Variables
-  public generalInfo!: Establishment | null;
-  public tableInfo!: EstablishmentTable | null;
-  public visitors!: AddVisitorResponse | null;
+  public generalInfo!: Establishment;
+  public tableInfo!: EstablishmentTable;
+  public visitors!: AddVisitorResponse;
   public TableId!: string;
 
   // Input Field Variables
@@ -36,7 +37,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private _accountService: AccountService,
     private _estblishmentsService: EstablishmentsService,
     private _router: Router,
-    private _localStorageService: LocalStorageService
+    private _localStorageService: LocalStorageService,
+    private _imagePath: ImagePath
   ) {
     super(_matSnackBar);
 
@@ -161,5 +163,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
    */
   scrollToTop() {
     window.scrollTo(0, 0);
+  }
+
+  getImage(image: string) {
+    return this._imagePath.getImage(image);
   }
 }

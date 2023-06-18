@@ -17,12 +17,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpInterceptors } from './core/interceptor/http.interceptor';
 import { HttpClientService } from './core/services/http-client.service';
 import { RouteConfig } from './core/config/route.config';
+import { ImagePath } from './core/config/imagepth.config';
 import {
   MatDialog,
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { ErrorInterceptor } from './core/interceptor/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent, MainLayoutComponent, FooterOnlyLayoutComponent],
@@ -41,7 +43,7 @@ import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
     FormsModule,
     MatDialogModule,
     HttpClientModule,
-    NgxScannerQrcodeModule
+    NgxScannerQrcodeModule,
   ],
   providers: [
     {
@@ -49,8 +51,14 @@ import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
       useClass: HttpInterceptors,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
     HttpClientService,
     RouteConfig,
+    ImagePath,
     {
       provide: APP_INITIALIZER,
       useFactory: AbstractInitializationFactory.getInitializationFunction,

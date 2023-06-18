@@ -25,10 +25,16 @@
       <ng-container *ngIf="true">
         <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="80">
           <div *ngIf="IsVisitorAvailialbe" class="request-btn" fxFlex="20">
-            <button class="green-round-btn"
-                    data-bs-target="#requestService"
-                    data-bs-toggle="modal">
-              {{ serviceRequested.requested ? "Cancel Service Request" : "Request Service" }}
+            <button
+              class="green-round-btn"
+              data-bs-target="#requestService"
+              data-bs-toggle="modal"
+            >
+              {{
+                serviceRequested?.requested
+                  ? "Cancel Service Request"
+                  : "Request Service"
+              }}
             </button>
           </div>
           <div *ngIf="IsVisitorAvailialbe" class="leave-btn" fxFlex="20">
