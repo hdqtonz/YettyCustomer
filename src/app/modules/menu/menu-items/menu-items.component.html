@@ -3,7 +3,7 @@
     <div class="col-lg-2 col-md-2 col-sm-4 col-6" *ngFor="let menu of menuSection?.sections">
       <ul class="ks-cboxtags">
         <li>
-          <input type="checkbox" [id]="menu?.name" [value]="menu?.id" (change)="checkValue(menu?.id)" />
+          <input type="checkbox" [id]="menu?.name" [value]="menu?.id" [checked]="selectedMenus.includes(menu?.id)" (change)="onSelectMenuSection(menu?.id)" />
           <label [for]="menu?.name"> {{menu?.name}} </label>
         </li>
       </ul>
@@ -117,17 +117,17 @@
   <ng-container *ngIf="menuType == 'grid'">
     <div class="row mt-5 mb-5">
       <div class="col-lg-3 col-md-4 col-sm-6 mt-4"
-           *ngFor="let menu of menuSection?.menuItems"
-           routerLink="/menu/detail">
+           *ngFor="let menu of menuSection?.menuItems">
         <div class="menu-item-container"
              [ngClass]="{ gridUnavailable: menu.available == false }">
           <div>
             <img class="img-fluid menu-item-img"
                  [src]="getImage(menu?.photos[0])"
-                 [alt]="menu?.name" />
+                 [alt]="menu?.name"
+                 routerLink="/menu/detail"/>
           </div>
           <div class="menu-item-name mt-3 mb-3">{{ menu?.name ? menu?.name : "NA" }}</div>
-          <div class="menu-item-detail text-center">{{ menu?.description ? menu?.description : "NA" }}</div>
+          <div class="menu-item-detail text-center" routerLink="/menu/detail">{{ menu?.description ? menu?.description : "NA" }}</div>
           <div class="menu-item-size">
             <ng-container *ngFor="let size of menu?.sizes">
               <div class="size" [class.size-selected]="size?.name == 'Big'"> {{ size?.name ? mealSize[size?.name] : "NA" }} </div>

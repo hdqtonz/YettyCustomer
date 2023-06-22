@@ -20,6 +20,7 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
 
   // Data variable
   public menuSection!: MenuSections;
+  public selectedMenus: string[] = [];
   public menuSectionInfo: MenuSectionFullInfo[] = [];
 
   constructor(
@@ -32,9 +33,7 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     this.getEstblishmentsMenuSections();
   }
 
-  ngOnInit(): void {
-    this.getEstblishmentsMenuSections();
-  }
+  ngOnInit(): void { }
 
   menuType: string = 'grid' || 'tile';
 
@@ -46,6 +45,7 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     this._estblishmentsService.getEstablishmentMenuSections().subscribe({
       next: (res: MenuSections) => {
         this.menuSection = res;
+        this.onSelectMenuSection(this.menuSection.sections[0].id);
       },
       error: (err) => {
         this.isLoading = false;
@@ -57,8 +57,17 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     });
   }
 
-  checkValue(menuSectionId: string | undefined) {
-    console.log(menuSectionId);
+
+  onSelectMenuSection(menuSectionId: string | undefined) {
+    if (this.selectedMenus.includes(menuSectionId)) {
+      this.selectedMenus.forEach((item, index) => {
+        if (item == menuSectionId) this.selectedMenus.splice(index, 1);
+      });
+    }
+    else {
+      this.selectedMenus.push(menuSectionId);
+    }
+
     if (this.menuSectionInfo && this.menuSectionInfo.filter(x => x.id == menuSectionId).length > 0) {
       this.menuSectionInfo = this.menuSectionInfo.filter(x => x.id != menuSectionId);
     }

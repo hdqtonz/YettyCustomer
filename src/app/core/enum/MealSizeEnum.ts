@@ -1,5 +1,5 @@
 export enum MealSizeEnum {
   Small = 'S',
-  Medium = 'M',
+  Normal = 'M',
   Big = 'L'
 }
