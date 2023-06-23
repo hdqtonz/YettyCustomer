@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../../core/class/base-component';
@@ -8,6 +7,7 @@ import { MealSizeEnum } from '../../../core/enum/MealSizeEnum';
 import { MenuSectionFullInfo } from '../../../core/interface/MenuSectionFullInfo';
 import { MenuSections } from '../../../core/interface/MenuSections';
 import { EstablishmentsService } from '../../../core/services/establishments.service';
+import { OrdersService } from '../../../core/services/orders.service';
 import { MenuItem, OrderItemRequest } from '../manu';
 
 @Component({
@@ -28,13 +28,15 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     private _matSnackBar: MatSnackBar,
     private _router: Router,
     private _estblishmentsService: EstablishmentsService,
-    private _imagePath: ImagePath
+    private _orderService: OrdersService,
+    private _imagePath: ImagePath,
+    private _cdr: ChangeDetectorRef
   ) {
     super(_matSnackBar);
     this.getEstblishmentsMenuSections();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   menuType: string = 'grid' || 'tile';
 
@@ -178,7 +180,22 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     orderItemRequest.menuItemId = item.id;
     orderItemRequest.menuItemSizeId = this.getSlectedSize(item);
     orderItemRequest.comment = '';
-    return orderItemRequest;
+    //return orderItemRequest;
+
+    this._orderService.addVisitorOrder(orderItemRequest).subscribe({
+      next: (res: any) => {
+        this.isLoading = false;
+        console.log(res, 'Item added');
+        this.showMessage('Item added successfully');
+      },
+      error: (err) => {
+        this.showError(err?.errorMessage);
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    })
   }
 
   /**
@@ -197,9 +214,25 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
             console.log(e.name + ' : ' + SelectedSize);
           }
         });
-
         return ele[i].value;
       }
     }
   }
+
+  /**
+   * To Get Selected Size
+   * @param item
+   * @returns
+   */
+  displayPriceBasedOnSize(id) {
+    let ele: any = document.getElementById(id);
+    if (ele?.checked) {
+      return true;
+    }
+    else {
+      return false;
+    } 
+  }
+
+  handleChange() { this._cdr.detectChanges(); }
 }

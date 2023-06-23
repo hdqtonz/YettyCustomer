@@ -117,7 +117,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
             this.visitors.id
           );
           this.showMessage('Successfully Joined the Table');
-          // Navigating usre to Manu page
+          // Navigating usre to Menu page
           this.navigateTo(AppRoute.Menu);
           this.isLoading = false;
         },
