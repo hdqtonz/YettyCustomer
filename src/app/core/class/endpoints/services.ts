@@ -5,7 +5,7 @@ export class serviceAPIEndpoints {
    * @type {string}
    */
   static _isServiceRequestedOnTable: string =
-    'establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service';
+    'establishments/{establishmentId}}/tables/{tableId}/visitors/{visitorId}/service';
 
   /**
    * tags: Service (Post)
@@ -13,7 +13,7 @@ export class serviceAPIEndpoints {
    * @type {string}
    */
   static _requestServiceOnTable: string =
-    'establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service';
+    'establishments/{establishmentId}}/tables/{tableId}/visitors/{visitorId}/service';
 
   /**
    * tags: Service (Delete)
@@ -21,5 +21,5 @@ export class serviceAPIEndpoints {
    * @type {string}
    */
   static _cancelServiceRequestOnTable: string =
-    'establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/service';
+    'establishments/{establishmentId}/tables/{tableId}/visitors/{visitorId}/service';
 }

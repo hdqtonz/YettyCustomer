@@ -35,12 +35,14 @@
     <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
       <div class="light-green-bg p-4">
         <button class="order-type-header">New Order</button>
-        <div class="order-item">
-          <div class="item-name">Spaghetti</div>
-          <div class="item-price">$24.1</div>
+        <div class="order-item" *ngFor="let newOrder of orders?.orderItems">
+          <div class="item-name"> {{ newOrder?.menuItem ? newOrder?.menuItem : "NA" }} </div>
+          <div class="item-price">
+            $ {{ newOrder?.price ? newOrder?.price : "NA" }}
+          </div>
           <div class="item-actions d-flex justify-content-between">
-            <button class="preferance-btn">Preference</button>
-            <button class="remove-btn">Remove</button>
+            <button class="preferance-btn" (click)="onClickEditOrder()">Preference</button>
+            <button class="remove-btn" (click)="onClickRemoveOrder()">Remove</button>
           </div>
         </div>
         <!-- price totals -->
