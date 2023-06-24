@@ -39,12 +39,14 @@
       <div class="col-lg-2">
         <div class="footer-title">Information</div>
         <div class="footer-item">Contact Us</div>
-        <div class="footer-item">Join a Table</div>
+        <div class="footer-item" [routerLink]="['Home']">Join a Table</div>
       </div>
       <div class="col-lg-3">
         <div class="footer-title">Links</div>
-        <div class="footer-item">Faqs</div>
-        <div class="footer-item">Terms & Conditions</div>
+        <div class="footer-item" [routerLink]="['faqs']">Faqs</div>
+        <div class="footer-item" [routerLink]="['terms-and-conditions']">
+          Terms & Conditions
+        </div>
       </div>
 
       <div *ngIf="isEstablishmentInfo && establishmentInfo" class="col-lg-3">

@@ -42,6 +42,13 @@ export class LandingComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initialization();
+  }
+
+  /**
+   * initialization function
+   */
+  initialization() {
     if (this.establishmentId?.length && this.tableId?.length) {
       this._localStorageService.setItem(
         LocalStorage.ESTABLISHMENT_ID,
@@ -53,6 +60,9 @@ export class LandingComponent extends BaseComponent implements OnInit {
     }
   }
 
+  /**
+   * Opne Qr scanner
+   */
   onOfQrScanner() {
     const dialogRef = this._dialog.open(QrScannerComponent, {
       height: '80%',
@@ -60,8 +70,13 @@ export class LandingComponent extends BaseComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe({
-      next: (res) => {
-        this.getEstblishmmentsSetting();
+      next: (res: any) => {
+        let data = res?.data;
+        if (data) {
+          this.establishmentId = data.establishmentId;
+          this.tableId = data.tableId;
+          this.initialization();
+        }
       },
     });
   }

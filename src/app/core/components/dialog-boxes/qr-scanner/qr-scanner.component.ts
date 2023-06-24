@@ -1,5 +1,6 @@
 import { ViewEncapsulation } from '@angular/compiler';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   ScannerQRCodeConfig,
   ScannerQRCodeResult,
@@ -33,7 +34,9 @@ export class QrScannerComponent implements AfterViewInit {
 
   constructor(
     private qrcode: NgxScannerQrcodeService,
-    private _localStorageService: LocalStorageService
+    private _localStorageService: LocalStorageService,
+    @Inject(MAT_DIALOG_DATA) public data: string,
+    private dialogRef: MatDialogRef<QrScannerComponent>
   ) {}
 
   ngAfterViewInit(): void {
@@ -53,13 +56,19 @@ export class QrScannerComponent implements AfterViewInit {
       data.indexOf('?')
     );
 
-    console.log(e, 'data.e');
-    this._localStorageService.setItem(LocalStorage.TABLE_ID, tableId);
+    let Data = {
+      tableId: tableId,
+      establishmentId: establishmentId,
+    };
 
-    this._localStorageService.setItem(
-      LocalStorage.ESTABLISHMENT_ID,
-      establishmentId
-    );
+    this.confirm(Data);
+
+    // this._localStorageService.setItem(LocalStorage.TABLE_ID, tableId);
+
+    // this._localStorageService.setItem(
+    //   LocalStorage.ESTABLISHMENT_ID,
+    //   establishmentId
+    // );
   }
 
   public handle(action: any, fn: string): void {
@@ -78,5 +87,10 @@ export class QrScannerComponent implements AfterViewInit {
     } else {
       action[fn]().subscribe((r: any) => console.log(fn, r), alert);
     }
+  }
+
+  confirm(data?: any) {
+    this.dialogRef.close({ data: data });
+    this.handle(this.action, 'stop');
   }
 }

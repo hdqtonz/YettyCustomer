@@ -45,6 +45,18 @@ const routes: Routes = [
           import('./modules/order/order.module').then((m) => m.OrderModule),
         canActivate: [PageGuard],
       },
+      {
+        path: 'terms-and-conditions',
+        loadChildren: () =>
+          import(
+            './modules/terms-and-conditions/terms-and-conditions.module'
+          ).then((m) => m.TermsAndConditionsModule),
+      },
+      {
+        path: 'faqs',
+        loadChildren: () =>
+          import('./modules/faqs/faqs.module').then((m) => m.FaqsModule),
+      },
     ],
   },
   { path: '**', pathMatch: 'full', redirectTo: 'landing' },

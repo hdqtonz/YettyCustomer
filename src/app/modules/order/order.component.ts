@@ -29,7 +29,6 @@ export class OrderComponent extends BaseComponent implements OnInit {
     this._orderService.getTableVisitorOrder().subscribe({
       next: (res: Order) => {
         this.orders = res;
-        console.log(this.orders, 'visitor order');
       },
       error: (err) => {
         this.isLoading = false;

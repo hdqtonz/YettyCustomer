@@ -26,3 +26,19 @@ div {
     border-radius: 5px;
   }
 }
+
+.dialog-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+  button {
+    background-color: var(--yetty-yellow);
+    border-radius: 50%;
+    height: 45px;
+    width: 44px;
+    margin: 4px;
+  }
+}

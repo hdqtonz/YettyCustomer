@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { QrScannerComponent } from './qr-scanner.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [
-    QrScannerComponent
-  ],
+  declarations: [QrScannerComponent],
   imports: [
     CommonModule,
     MatDialogModule,
-    NgxScannerQrcodeModule
-  ]
+    NgxScannerQrcodeModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
 })
-export class QrScannerModule { }
+export class QrScannerModule {}
