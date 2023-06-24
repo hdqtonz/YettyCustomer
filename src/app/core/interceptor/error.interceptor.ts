@@ -30,34 +30,13 @@ export class ErrorInterceptor extends BaseComponent implements HttpInterceptor {
           this._accountService.establishmentInfo
         ) {
           // auto remove visitor from the table if 401 or 403 response returned from api
+          this._accountService
+            .removeVisitorFromTable()
+            .subscribe((response) => {});
         }
 
-        switch (err.status) {
-          case 0:
-            return throwError(() => new Error('API Not Runing'));
-
-          case 400:
-            this.showError(
-              'Bad Request - insufficient or invalid data provided'
-            );
-            return throwError(() => new Error(error));
-
-          case 500:
-            this.showError('Server Is not Runing');
-            return throwError(() => new Error(error));
-
-          case 404:
-            this.showError('Not found');
-            break;
-
-          default: {
-            // to catch unidentified error
-            this.showError('Somthing went wrong', 'X');
-            console.log('non catched error', err);
-          }
-        }
-
-        const error = (err && err.error && err.error.message) || err.statusText;
+        const error: any =
+          (err && err.error && err.error.errorMessage) || err.statusText;
         return throwError(() => new Error(error));
       })
     );

@@ -36,7 +36,7 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     this.getEstblishmentsMenuSections();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   menuType: string = 'grid' || 'tile';
 
@@ -52,7 +52,7 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.showError(err?.errorMessage);
+        this.showError(err?.message);
       },
       complete: () => {
         this.isLoading = false;
@@ -86,7 +86,7 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
           },
           error: (err) => {
             this.isLoading = false;
-            this.showError(err?.errorMessage);
+            this.showError(err?.message);
           },
           complete: () => {
             this.isLoading = false;
@@ -189,13 +189,13 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
         this.showMessage('Item added successfully');
       },
       error: (err) => {
-        this.showError(err?.errorMessage);
+        this.showError(err?.message);
         this.isLoading = false;
       },
       complete: () => {
         this.isLoading = false;
       },
-    })
+    });
   }
 
   /**
@@ -228,11 +228,12 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     let ele: any = document.getElementById(id);
     if (ele?.checked) {
       return true;
-    }
-    else {
+    } else {
       return false;
-    } 
+    }
   }
 
-  handleChange() { this._cdr.detectChanges(); }
+  handleChange() {
+    this._cdr.detectChanges();
+  }
 }

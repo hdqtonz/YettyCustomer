@@ -7,6 +7,8 @@ import { EstablishmentSettings } from '../interface/EstablishmentSettings';
 import { Api } from '../class/api';
 import { LocalStorageService } from './local-storage.service';
 import { LocalStorage } from '../class/local-storage';
+import { tableAPIEndpoints } from '../class/endpoints/tables';
+import { AppRoute } from '../class/app-route';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +21,10 @@ export class AccountService {
   // Establishment setting Info
   public establishmentSettingSubject!: BehaviorSubject<EstablishmentSettings>;
   public establishmentSetting!: Observable<EstablishmentSettings>;
+
+  // VISITOR ID Subject
+  public visitorIdInfoSubject!: BehaviorSubject<string>;
+  public visotorIdInfo!: Observable<string>;
 
   constructor(
     private _router: Router,
@@ -49,6 +55,15 @@ export class AccountService {
       );
 
     this.establishmentSetting = this.establishmentSettingSubject.asObservable();
+
+    // Vistor Subject
+
+    let visitorId: string = this._localStorageService.getItem(
+      LocalStorage.VISITOR_ID
+    );
+
+    this.visitorIdInfoSubject = new BehaviorSubject<string>(visitorId);
+    this.visotorIdInfo = this.visitorIdInfoSubject.asObservable();
   }
 
   public get establishmentInfo() {
@@ -104,5 +119,50 @@ export class AccountService {
           return generalInfo;
         })
       );
+  }
+
+  removeVisitorFromTable() {
+    return this._http
+      .delete<any>(`${tableAPIEndpoints._removeVisitorFromTable}`)
+      .pipe(
+        map((response) => {
+          // Remove Subject Value and other local value
+          this.currentEstablishmentInfoSubject.next(null);
+          this.visitorIdInfoSubject.next(null);
+          this._localStorageService.removeKey(
+            LocalStorage.EstablishmentSetting
+          );
+          this._localStorageService.removeKey(LocalStorage.TABLE_ID);
+          this._localStorageService.removeKey(LocalStorage.VISITOR_ID);
+          this.navigateTo(AppRoute.Landing);
+
+          return response;
+        })
+      );
+  }
+
+  /**
+   * To navigate other pages
+   * @param path
+   */
+  navigateTo(path: string) {
+    this._router
+      .navigate([path])
+      .then((res) => {
+        if (res) {
+          this.scrollToTop();
+          localStorage.clear();
+        }
+      })
+      .catch((err) => {
+        console.log(`Somting went wrong`);
+      });
+  }
+
+  /**
+   * To Scroll at Top
+   */
+  scrollToTop() {
+    window.scrollTo(0, 0);
   }
 }

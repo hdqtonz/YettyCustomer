@@ -88,7 +88,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
         },
         error: (err) => {
           this.isLoading = false;
-          this.showError(err?.errorMessage);
+          this.showError(err?.message);
         },
         complete: () => {
           this.isLoading = false;
@@ -110,7 +110,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
       .subscribe({
         next: (res: AddVisitorResponse) => {
           this.visitors = res;
-
+          this._accountService.visitorIdInfoSubject.next(this.visitors.id);
           // Setting Up visitors id to local storage
           this._localStorageService.setItem(
             LocalStorage.VISITOR_ID,
@@ -122,7 +122,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
           this.isLoading = false;
         },
         error: (err) => {
-          this.showError(err?.errorMessage);
+          this.showError(err?.message);
           this.isLoading = false;
         },
         complete: () => {

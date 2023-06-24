@@ -10,7 +10,6 @@ import { OrdersService } from '../../core/services/orders.service';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent extends BaseComponent implements OnInit {
-
   // Data variable
   public orders: Order;
 
@@ -34,7 +33,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.showError(err?.errorMessage);
+        this.showError(err?.message);
       },
       complete: () => {
         this.isLoading = false;
@@ -42,11 +41,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
     });
   }
 
-  onClickEditOrder() {
+  onClickEditOrder() {}
 
-  }
-
-  onClickRemoveOrder() {
-
-  }
+  onClickRemoveOrder() {}
 }

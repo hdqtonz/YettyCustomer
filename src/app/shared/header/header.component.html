@@ -1,5 +1,5 @@
 <div
-  *ngIf="establishmentInfo?.address?.length && isEstablishmentInfo"
+  *ngIf="establishmentInfo?.address?.length"
   class="container-fluid nav-address d-flex"
 >
   <div class="container d-flex align-items-center w-100">
@@ -22,9 +22,9 @@
       fxLayoutAlign="end center"
       fxFlex="75"
     >
-      <ng-container *ngIf="true">
+      <ng-container>
         <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="80">
-          <div *ngIf="IsVisitorAvailialbe" class="request-btn" fxFlex="20">
+          <div *ngIf="visitorId?.length" class="request-btn" fxFlex="20">
             <button
               class="green-round-btn"
               data-bs-target="#requestService"
@@ -37,10 +37,16 @@
               }}
             </button>
           </div>
-          <div *ngIf="IsVisitorAvailialbe" class="leave-btn" fxFlex="20">
-            <button class="green-round-btn" (click)="removeVisitorFromTable()">Leave Table</button>
+          <div *ngIf="visitorId?.length" class="leave-btn" fxFlex="20">
+            <button class="green-round-btn" (click)="removeVisitor()">
+              Leave Table
+            </button>
           </div>
-          <div class="bng" fxFlex="20">
+          <div
+            *ngIf="establishmentInfo?.supportedCurrencies?.length"
+            class="bng"
+            fxFlex="20"
+          >
             <select
               (change)="onBaseCurrencyChange($event)"
               class="form-control dropdown-height"

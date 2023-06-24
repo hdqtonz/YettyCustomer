@@ -20,8 +20,4 @@ export class CommonService {
   cancelServiceRequestOnTable() {
     return this._http.delete<any>(`${Api._cancelServiceRequestOnTable}`);
   }
-
-  removeVisitorFromTable() {
-    return this._http.delete<any>(`${tableAPIEndpoints._removeVisitorFromTable}`);
-  }
 }

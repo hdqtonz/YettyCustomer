@@ -80,7 +80,7 @@ export class LandingComponent extends BaseComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.showError(err?.errorMessage);
+        this.showError(err?.message);
       },
       complete: () => {
         this.isLoading = false;
@@ -102,7 +102,7 @@ export class LandingComponent extends BaseComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.showError(err?.errorMessage);
+        this.showError(err?.message);
       },
       complete: () => {
         this.isLoading = false;

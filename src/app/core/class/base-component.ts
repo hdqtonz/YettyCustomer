@@ -12,7 +12,7 @@ export class BaseComponent {
    */
   showMessage(message: string, action?: string) {
     this.snackBar.open(message, action ? action : 'X', {
-      duration: 500000,
+      duration: 5000,
       panelClass: 'green-snackbar',
     });
   }

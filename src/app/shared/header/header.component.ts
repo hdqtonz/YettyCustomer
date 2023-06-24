@@ -21,8 +21,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   languages = Languages;
 
   public establishmentInfo!: Establishment;
-  public isEstablishmentInfo: boolean = false;
-  public IsVisitorAvailialbe: boolean = false;
+  public visitorId: string;
 
   public selectedType!: string;
 
@@ -45,17 +44,16 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this._accountService.currentEstablishmentInfo.subscribe((details) => {
-      this.isEstablishmentInfo = true;
+      // this.isEstablishmentInfo = true;
       this.establishmentInfo = details;
       this._cdr.detectChanges();
     });
 
     // To Show Some button into header
-    let visitorId = this._localStorageService.getItem(LocalStorage.VISITOR_ID);
-    if (visitorId) {
-      this.IsVisitorAvailialbe = true;
-      this.getServiceRequestedStatus();
-    }
+    this._accountService.visotorIdInfo.subscribe((visitorId) => {
+      this.visitorId = visitorId;
+      this._cdr.detectChanges();
+    });
 
     // Get Base Currency
     this.baseCurrency = this._localStorageService.getItem(
@@ -89,7 +87,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.showError(err.errorMessage);
+        this.showError(err.message);
         this.isLoading = false;
       },
       complete: () => {
@@ -106,7 +104,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.showError(err.errorMessage);
+        this.showError(err.message);
         this.isLoading = false;
       },
       complete: () => {
@@ -123,7 +121,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.showError(err.errorMessage);
+        this.showError(err.message);
         this.isLoading = false;
       },
       complete: () => {
@@ -132,19 +130,14 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     });
   }
 
-  removeVisitorFromTable() {
-    this.isLoading = true;
-    this._commonService.removeVisitorFromTable().subscribe({
+  removeVisitor() {
+    this._accountService.removeVisitorFromTable().subscribe({
       next: (response) => {
         this.showMessage('Visitor removed successfully');
-        this._localStorageService.removeKey(LocalStorage.TABLE_ID);
-        this._localStorageService.removeKey(LocalStorage.VISITOR_ID);
-        this._router.navigate([AppRoute.Home])
-
-        this.isLoading = false;
       },
       error: (err) => {
-        this.showError(err.errorMessage);
+        console.log(err, 'message');
+        this.showError(err?.message);
         this.isLoading = false;
       },
       complete: () => {
