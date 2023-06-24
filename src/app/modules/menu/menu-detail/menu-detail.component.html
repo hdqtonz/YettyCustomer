@@ -4,42 +4,77 @@
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6">
         <div class="menu-detail-img text-center">
-          <img src="/assets/images/menu-spaghetti.png" alt="ITEM NAME" />
+          <img [src]="getImage(menuDetails?.photos[0])" alt="ITEM NAME" />
         </div>
       </div>
       <div class="col-lg-8 col-md-8 col-sm-6 d-flex align-items-center">
         <div class="menu-item-detail">
           <div class="item-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas
-            consequat Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Egestas consequat Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Egestas consequat Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Egestas consequat Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Egestas consequat Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Egestas consequat.
+            {{ menuDetails.description }}
           </div>
-          <div class="menu-item-size">
-            <div class="size">Small</div>
-            <div class="size">Medium</div>
-            <div class="size size-selected">Large</div>
+          <div class="radio-button menu-item-size">
+            <ng-container
+              *ngFor="let size of menuDetails?.sizes; let i = index"
+            >
+              <div class="size">
+                <input
+                  type="radio"
+                  [id]="menuDetails.id + i"
+                  [name]="menuDetails.id"
+                  [value]="size.id"
+                  [checked]="size?.name == 'Big' || 'Small' || 'Normal'"
+                  (change)="handleChange()"
+                />
+                <label
+                  [for]="menuDetails.id + i"
+                  class="size"
+                  [class.size-selected]="
+                    size?.name == 'Big' || 'Small' || 'Normal'
+                  "
+                >
+                  {{ size?.name ? size?.name : "NA" }}
+                </label>
+              </div>
+              <!-- <div class="size">Medium</div>
+              <div class="size size-selected">Large</div> -->
+            </ng-container>
           </div>
-          <div class="menu-weight-calories mt-4">
-            <div>400 g</div>
-            <div>800 calories</div>
-          </div>
-          <div class="menu-item-price d-flex mt-5">
-            <div class="price">Price: $12.04</div>
-            <div class="menu-item-add">
-              <button class="add-btn">Add</button>
+          <ng-container *ngFor="let size of menuDetails?.sizes; let i = index">
+            <div
+              *ngIf="displayPriceBasedOnSize(menuDetails?.id + i)"
+              class="menu-weight-calories mt-4"
+            >
+              <div>
+                {{ size.quantity ? size.quantity : "NA" }}
+                {{ size.unit ? size.unit : "NA" }}
+              </div>
+              <div>{{ size.calories }} calories</div>
             </div>
-          </div>
+            <div
+              *ngIf="displayPriceBasedOnSize(menuDetails?.id + i)"
+              class="menu-item-price d-flex mt-5"
+            >
+              <div class="price">
+                Price: ${{ size.price ? size.price : "NA" }}
+              </div>
+
+              <div class="menu-item-add">
+                <button (click)="onAddItem(menuDetails)" class="add-btn">
+                  Add
+                </button>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Back to menu -->
-  <button class="back-to-menu mt-5 mb-5" routerLink="/menu/menu-items">
+  <button
+    class="back-to-menu mt-5 mb-5"
+    (click)="navigateTo(appRoute.Menu + '/' + appRoute.Item)"
+  >
     Back To Menu Page
   </button>
 </div>

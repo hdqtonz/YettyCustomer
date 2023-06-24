@@ -22,4 +22,16 @@ export class AppRoute {
    * @type {string}
    */
   static Order: string = `order`;
+
+  /**
+   * Routing path for Order page
+   * @type {string}
+   */
+  static MenuDetail: string = `menu/detail`;
+
+  /**
+   * Routing path for Order page
+   * @type {string}
+   */
+  static Item: string = `menu-items`;
 }

@@ -9,6 +9,10 @@ import { MenuSections } from '../../../core/interface/MenuSections';
 import { EstablishmentsService } from '../../../core/services/establishments.service';
 import { OrdersService } from '../../../core/services/orders.service';
 import { MenuItem, OrderItemRequest } from '../manu';
+import { AppRoute } from 'src/app/core/class/app-route';
+import { MenuService } from '../menu.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { LocalStorage } from 'src/app/core/class/local-storage';
 
 @Component({
   selector: 'app-menu-items',
@@ -18,6 +22,7 @@ import { MenuItem, OrderItemRequest } from '../manu';
 export class MenuItemsComponent extends BaseComponent implements OnInit {
   //other variable
   mealSize = MealSizeEnum;
+  appRoute = AppRoute;
 
   // Data variable
   public menuSection!: MenuSections;
@@ -30,7 +35,9 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     private _estblishmentsService: EstablishmentsService,
     private _orderService: OrdersService,
     private _imagePath: ImagePath,
-    private _cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef,
+    private _menuService: MenuService,
+    private _localStorageService: LocalStorageService
   ) {
     super(_matSnackBar);
     this.getEstblishmentsMenuSections();
@@ -104,70 +111,31 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     return this._imagePath.getImage(image);
   }
 
-  /*menuItems = [
-    {
-      id: 0,
-      name: 'Spaghetti',
-      imgUrl: 'assets/images/menu-spaghetti.png',
-      detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
-      price: '12.05',
-    },
-    {
-      id: 1,
-      name: 'Capellini',
-      imgUrl: 'assets/images/menu-fettuccine.png',
-      detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
-      price: '11.05',
-      available: false,
-    },
-    {
-      id: 2,
-      name: 'Capellini',
-      imgUrl: 'assets/images/menu-fettuccine.png',
-      detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
-      price: '11.05',
-    },
-    {
-      id: 3,
-      name: 'Spaghetti',
-      imgUrl: 'assets/images/menu-spaghetti.png',
-      detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
-      available: false,
-      price: '12.05',
-    },
-    {
-      id: 4,
-      name: 'Capellini',
-      imgUrl: 'assets/images/menu-fettuccine.png',
-      detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
-      price: '11.05',
-    },
-    {
-      id: 5,
-      name: 'Spaghetti',
-      imgUrl: 'assets/images/menu-spaghetti.png',
-      detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
-      price: '12.05',
-    },
-    {
-      id: 6,
-      name: 'Spaghetti',
-      imgUrl: 'assets/images/menu-spaghetti.png',
-      detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
-      price: '12.05',
-    },
-    {
-      id: 7,
-      name: 'Spaghetti',
-      imgUrl: 'assets/images/menu-spaghetti.png',
-      detail: 'lorem ipsum dolors it amet constuas elit cosnat uiqnsd',
-      price: '12.05',
-    },
-  ];*/
-
+  /**
+   *  Add Item
+   * @param item
+   * @returns
+   */
   onAddItem(item) {
-    let data = this.initializeAddItmeValue(item);
-    // API call below
+    if (!Object.keys(item).length) {
+      return;
+    }
+    // API call
+    this._orderService
+      .addVisitorOrder(this.initializeAddItmeValue(item))
+      .subscribe({
+        next: (res: any) => {
+          this.isLoading = false;
+          this.showMessage('Item added successfully');
+        },
+        error: (err) => {
+          this.showError(err?.message);
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
   }
 
   /**
@@ -180,24 +148,8 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     orderItemRequest.menuItemId = item.id;
     orderItemRequest.menuItemSizeId = this.getSlectedSize(item);
     orderItemRequest.comment = '';
-    //return orderItemRequest;
-
-    this._orderService.addVisitorOrder(orderItemRequest).subscribe({
-      next: (res: any) => {
-        this.isLoading = false;
-        console.log(res, 'Item added');
-        this.showMessage('Item added successfully');
-      },
-      error: (err) => {
-        this.showError(err?.message);
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-      },
-    });
+    return orderItemRequest;
   }
-
   /**
    * To Get Selected Size
    * @param item
@@ -233,7 +185,41 @@ export class MenuItemsComponent extends BaseComponent implements OnInit {
     }
   }
 
+  /**
+   * To Handle Changes
+   */
   handleChange() {
     this._cdr.detectChanges();
+  }
+
+  /**
+   * To navigate other pages
+   * @param path
+   */
+  navigateTo(path: string, data?: any) {
+    if (data) {
+      this._menuService.menuDeatilSubject.next(data);
+      this._localStorageService.setItem(
+        LocalStorage.MenuDetail,
+        JSON.stringify(data)
+      );
+    }
+    this._router
+      .navigate([path])
+      .then((res) => {
+        if (res) {
+          this.scrollToTop();
+        }
+      })
+      .catch((err) => {
+        console.log(`Somting went wrong`);
+      });
+  }
+
+  /**
+   * To Scroll at Top
+   */
+  scrollToTop() {
+    window.scrollTo(0, 0);
   }
 }

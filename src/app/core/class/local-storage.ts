@@ -8,4 +8,5 @@ export class LocalStorage {
   static TABLE_ID: string = 'tableId';
   static VISITOR_ID: string = 'visitorId';
   static LatLong: string = 'lat-long';
+  static MenuDetail:string = 'menuDetail'
 }
