@@ -29,7 +29,7 @@ export class orderAPIEndpoints {
    * summary: Removes a not yet sent order item from a table visitor's order
    * @type {string}
    */
-  static _removeOrderItem: string = "establishments/{establishmentId}/tables/{tableId}/visitors/{visitorId}/order-items/{orderItemId}";
+  static _removeOrderItem: string = "establishments/{establishmentId}/tables/{tableId}/visitors/{visitorId}/order-items";
 
 
   /**
