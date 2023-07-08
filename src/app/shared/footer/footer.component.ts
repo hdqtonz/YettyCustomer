@@ -15,6 +15,7 @@ export class FooterComponent implements OnInit {
 
   public establishmentInfo!: Establishment;
   public isEstablishmentInfo: boolean = false;
+  public visitorId: string;
 
   constructor(
     private _router: Router,
@@ -31,6 +32,12 @@ export class FooterComponent implements OnInit {
         this._cdr.detectChanges();
       }
     );
+
+    // To Show Some order page
+    this._accountService.visotorIdInfo.subscribe((visitorId) => {
+      this.visitorId = visitorId;
+      this._cdr.detectChanges();
+    });
   }
 
   /**

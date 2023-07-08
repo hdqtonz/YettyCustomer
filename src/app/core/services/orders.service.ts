@@ -6,38 +6,41 @@ import { OrderItemRequest } from '../interface/OrderItemRequest';
 import { HttpClientService } from './http-client.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdersService {
-
-  constructor(private _http: HttpClientService) { }
+  constructor(private _http: HttpClientService) {}
 
   getTableVisitorOrder() {
-    return this._http.get<Order>(
-      `${orderAPIEndpoints._getTableVisitorOrder}`,
-      { params: new CustomHttpParams(true) }
-    );
+    return this._http.get<Order>(`${orderAPIEndpoints._getTableVisitorOrder}`, {
+      params: new CustomHttpParams(true),
+    });
   }
 
   addVisitorOrder(reqBody: OrderItemRequest) {
-    return this._http.post<any>(`${orderAPIEndpoints._addOrderItem}`,
+    return this._http.post<any>(`${orderAPIEndpoints._addOrderItem}`, reqBody);
+  }
+
+  modifyVisitorOrderItem(reqBody: OrderItemRequest, orderId: string) {
+    return this._http.put(
+      `${orderAPIEndpoints._modifyOrderItem}/${orderId}`,
       reqBody
     );
   }
 
-  modifyVisitorOrderItem() {
-    return this._http.put<Order>(`${orderAPIEndpoints._modifyOrderItem}`);
-  }
-
-  removeVisitorOrderItem(orderItemId: string) {
-    return this._http.delete<Order>(`${orderAPIEndpoints._removeOrderItem}/${orderItemId}`);
+  removeVisitorOrderItem(orderId: string) {
+    return this._http.delete(
+      `${orderAPIEndpoints._removeOrderItem}/${orderId}`
+    );
   }
 
   sendNotSentVisitorOrderItem() {
-    return this._http.post<Order>(`${orderAPIEndpoints._sendNotSentOrderItems}`);
+    return this._http.post(`${orderAPIEndpoints._sendNotSentOrderItems}`);
   }
 
-  cancelSentVisitorOrderItem() {
-    return this._http.delete<Order>(`${orderAPIEndpoints._cancelSentOrderItem}`);
+  cancelSentVisitorOrderItem(orderId: string) {
+    return this._http.delete(
+      `${orderAPIEndpoints._cancelSentOrderItem}/${orderId}/cancel`
+    );
   }
 }
