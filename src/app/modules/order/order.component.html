@@ -1,8 +1,6 @@
 <!-- Toast Notification -->
-<div
-  class="container-fluid"
-  style="background-color: var(--yetty-green); height: 80px"
->
+<div class="container-fluid"
+     style="background-color: var(--yetty-green); height: 80px">
   <div class="container h-100">
     <div class="--toast-container">
       <div class="--toast-detail">
@@ -10,26 +8,22 @@
         <div class="--toast-detail">View Order details</div>
       </div>
       <div class="--toast-action">
-        <img
-          width="40px"
-          height="40px"
-          src="/assets/images/icons/order-close.svg"
-          alt="close"
-        />
+        <img width="40px"
+             height="40px"
+             src="/assets/images/icons/order-close.svg"
+             alt="close" />
       </div>
     </div>
   </div>
 </div>
 
 <!-- Order container -->
-<div
-  class="container mt-5 mb-5"
-  style="
+<div class="container mt-5 mb-5"
+     style="
     box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.25);
     padding: 0;
     border-radius: 20px;
-  "
->
+  ">
   <div class="order-header mb-5">MY ORDER</div>
   <div class="row mt-5 p-4">
     <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
@@ -41,8 +35,14 @@
             $ {{ newOrder?.price ? newOrder?.price : "NA" }}
           </div>
           <div class="item-actions d-flex justify-content-between">
-            <button class="preferance-btn" (click)="onClickEditOrder()">Preference</button>
-            <button class="remove-btn" (click)="onClickRemoveOrder()">Remove</button>
+            <button class="preferance-btn"
+                    type="button"
+                    data-bs-target="#PreferenceModal"
+                    data-bs-toggle="modal"
+                    (click)="onClickEditOrder()">
+              Preference
+            </button>
+            <button class="remove-btn" (click)="onClickRemoveOrder(newOrder?.id)">Remove</button>
           </div>
         </div>
         <!-- price totals -->
@@ -73,9 +73,7 @@
         <button class="order-type-header">Sent Order</button>
         <div class="order-item">
           <div class="item-name">
-            <mat-checkbox color="primary"
-              ><span class="check-item">Spaghetti</span></mat-checkbox
-            >
+            <mat-checkbox color="primary"><span class="check-item">Spaghetti</span></mat-checkbox>
           </div>
           <div class="item-price">$24.1</div>
           <div class="item-actions d-flex justify-content-between">
@@ -109,9 +107,7 @@
         <button class="order-type-header">Confirmed Order</button>
         <div class="order-item">
           <div class="item-name">
-            <mat-checkbox color="primary"
-              ><span class="check-item">Spaghetti</span></mat-checkbox
-            >
+            <mat-checkbox color="primary"><span class="check-item">Spaghetti</span></mat-checkbox>
           </div>
           <div class="item-price">$24.1</div>
           <div class="item-actions d-flex justify-content-between">
@@ -145,9 +141,7 @@
         <button class="order-type-header">Served Order</button>
         <div class="order-item">
           <div class="item-name">
-            <mat-checkbox color="primary"
-              ><span class="check-item">Spaghetti</span></mat-checkbox
-            >
+            <mat-checkbox color="primary"><span class="check-item">Spaghetti</span></mat-checkbox>
           </div>
           <div class="item-price">$24.1</div>
         </div>
@@ -174,23 +168,19 @@
     </div>
   </div>
   <div class="p-5 transfer-btn-container">
-    <button
-      class="send-btn transfer"
-      data-bs-toggle="modal"
-      data-bs-target="#transferOrderModal"
-    >
+    <button class="send-btn transfer"
+            data-bs-toggle="modal"
+            data-bs-target="#transferOrderModal">
       Transfer Selected
     </button>
   </div>
 
   <!-- Transfer order 1 / select items -->
-  <div
-    class="modal fade modal-lg"
-    id="transferOrderModal"
-    tabindex="-1"
-    aria-labelledby="transferOrderModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade modal-lg"
+       id="transferOrderModal"
+       tabindex="-1"
+       aria-labelledby="transferOrderModalLabel"
+       aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -216,11 +206,7 @@
         </div>
         <div class="modal-footer justify-content-start">
           <button
-            type="button"
-            class="transfer-btn"
-            data-bs-target="#transferOrderModal2"
-            data-bs-toggle="modal"
-          >
+                  class="transfer-btn">
             Transfer
           </button>
           <button type="button" class="cancel-btn" data-bs-dismiss="modal">
@@ -232,34 +218,28 @@
   </div>
 
   <!-- Transfer order 2 / preference -->
-  <div
-    class="modal fade modal-lg"
-    id="transferOrderModal2"
-    aria-hidden="true"
-    aria-labelledby="transferOrderModalLabel2"
-    tabindex="-1"
-  >
+  <div class="modal fade modal-lg"
+       id="PreferenceModal"
+       aria-hidden="true"
+       aria-labelledby="PreferenceModalLabel"
+       tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="transferOrderModalLabel2">
+          <h1 class="modal-title fs-5" id="PreferenceModalLabel">
             Type Preference or Instruction
           </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div>
-            <textarea
-              class="form-control"
-              cols="30"
-              rows="10"
-              placeholder="Type any preference of Order..."
-            ></textarea>
+            <textarea class="form-control"
+                      cols="30"
+                      rows="10"
+                      placeholder="Type any preference of Order..."></textarea>
           </div>
         </div>
         <div class="modal-footer justify-content-start">

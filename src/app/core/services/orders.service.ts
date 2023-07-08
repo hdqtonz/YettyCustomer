@@ -29,8 +29,8 @@ export class OrdersService {
     return this._http.put<Order>(`${orderAPIEndpoints._modifyOrderItem}`);
   }
 
-  removeVisitorOrderItem() {
-    return this._http.delete<Order>(`${orderAPIEndpoints._removeOrderItem}`);
+  removeVisitorOrderItem(orderItemId: string) {
+    return this._http.delete<Order>(`${orderAPIEndpoints._removeOrderItem}/${orderItemId}`);
   }
 
   sendNotSentVisitorOrderItem() {

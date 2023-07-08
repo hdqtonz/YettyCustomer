@@ -29,6 +29,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
     this._orderService.getTableVisitorOrder().subscribe({
       next: (res: Order) => {
         this.orders = res;
+        this.isLoading = false;
         console.log(this.orders, 'visitor order');
       },
       error: (err) => {
@@ -41,7 +42,26 @@ export class OrderComponent extends BaseComponent implements OnInit {
     });
   }
 
-  onClickEditOrder() {}
+  onClickEditOrder() {
 
-  onClickRemoveOrder() {}
+  }
+
+  onClickRemoveOrder(orderId) {
+    this.isLoading = true;
+    this._orderService.removeVisitorOrderItem(orderId).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.showMessage('Item removed successfully');
+        this.isLoading = false;
+        this.getVisitorOrder();
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.showError(err?.errorMessage);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    })
+  }
 }
