@@ -7,6 +7,8 @@ import { OrderItemsPaymentRequest } from 'src/app/core/interface/OrderItemsPayme
 import { OrderItemPaymentRequest } from 'src/app/core/interface/OrderItemPaymentRequest';
 import { PaymentService } from 'src/app/core/services/payment.service';
 import { OrderItemsPrice } from 'src/app/core/interface/OrderItemsPrice';
+import { PaymentMethods } from 'src/app/core/interface/PaymentMethods';
+import { PaymentMethodsSettings } from 'src/app/core/interface/PaymentMethodsSettings';
 
 @Component({
   selector: 'app-check',
@@ -18,6 +20,8 @@ export class CheckComponent extends BaseComponent implements OnInit {
   public checkedItems = [];
   public orderItemIds = [];
   public orderItemPrice: OrderItemsPrice;
+  public paymentMethods: PaymentMethods;
+  public paymentMethodsSettings: PaymentMethodsSettings;
 
   chekbox = [
     { name: "Everyone's", ID: '1', checked: true },
@@ -34,6 +38,7 @@ export class CheckComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCheckOrderList(true);
+    this.getEstablishmentPaymentMethodsSettings();
   }
 
   everyone: boolean = true;
@@ -128,11 +133,45 @@ export class CheckComponent extends BaseComponent implements OnInit {
       next: (res) => {
         this.isLoading = false;
         this.orderItemPrice = res;
-        console.log(res, 'res')
+        this.getEstablishmentPaymentMethods();
       },
       error: (err) => {
         this.isLoading = false;
         this.showError(err.message);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  getEstablishmentPaymentMethods() {
+    this._paymentService.getEstablishmentPaymentMethods().subscribe({
+      next: (res) => {
+        this.paymentMethods = res;
+        console.log(this.paymentMethods);
+        console.table(this.paymentMethods);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.showError(err.message);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  getEstablishmentPaymentMethodsSettings() {
+    this._paymentService.getEstablishmentPaymentMethodsSettings().subscribe({
+      next: (res) => {
+        this.paymentMethodsSettings = res;
+        console.log(this.paymentMethodsSettings, 'paymentMethodsSettings');
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.showError(err.message);
+        this.isLoading = false;
       },
       complete: () => {
         this.isLoading = false;
