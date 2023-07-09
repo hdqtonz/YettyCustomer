@@ -33,6 +33,7 @@
         <button class="order-type-header">Item Name</button>
         <div class="item-name" *ngFor="let item of check?.items">
           <mat-checkbox
+            [disabled]="!item.canBePaid"
             color="primary"
             [checked]="orderItemIds.includes(item.orderItemId)"
             (change)="onCheckboxChange(item, $event)"
@@ -62,7 +63,7 @@
             </div>-->
       <div class="check-details">
         <div class="check-heading">Selected:</div>
-        <div class="check-value">$23</div>
+        <div class="check-value">${{ selectedTotal.toFixed(2) }}</div>
       </div>
       <div class="check-details">
         <div class="check-heading">Total:</div>
@@ -120,6 +121,7 @@
       <div class="modal-footer justify-content-center">
         <button
           *ngFor="let item of paymentMethods?.paymentMethods"
+          (click)="requestOrderItemsPayment(item.type)"
           class="transfer-btn"
           [ngClass]="{
             'transfer-btn': item.type === 'CASH',
@@ -131,8 +133,9 @@
         </button>
         <!-- <button class="cancel-btn" data-bs-dismiss="modal">
           ON POS TERMINAL
-        </button>
-        <button class="cancel-btn" data-bs-dismiss="modal">PAYPAL</button> -->
+        </button> -->
+        <!-- <button id="paypal-checkout-btn" class="cancel-btn" data-bs-dismiss="modal">PAYPAL</button> -->
+        <div id="paypal-checkout-btn"></div>
       </div>
     </div>
   </div>

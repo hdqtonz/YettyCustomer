@@ -32,9 +32,11 @@ export class PaymentService {
     );
   }
 
-  requestOrderItemsPayment() {
+  requestOrderItemsPayment(reqBody: OrderItemsPaymentRequest) {
     return this._http.post<PaymentRequestResult>(
-      `${paymentAPIEndpoints._requestOrderItemsPayment}`
+      `${paymentAPIEndpoints._requestOrderItemsPayment}`,
+      reqBody,
+      { params: new CustomHttpParams(true) }
     );
   }
 

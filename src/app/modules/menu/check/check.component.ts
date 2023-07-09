@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from '../../../core/class/base-component';
 import { Check } from '../../../core/interface/Check';
@@ -9,6 +9,8 @@ import { PaymentService } from 'src/app/core/services/payment.service';
 import { OrderItemsPrice } from 'src/app/core/interface/OrderItemsPrice';
 import { PaymentMethods } from 'src/app/core/interface/PaymentMethods';
 import { PaymentMethodsSettings } from 'src/app/core/interface/PaymentMethodsSettings';
+
+declare let paypal: any;
 
 @Component({
   selector: 'app-check',
@@ -22,11 +24,19 @@ export class CheckComponent extends BaseComponent implements OnInit {
   public orderItemPrice: OrderItemsPrice;
   public paymentMethods: PaymentMethods;
   public paymentMethodsSettings: PaymentMethodsSettings;
+  public selectedTotal: number = 0;
 
   chekbox = [
     { name: "Everyone's", ID: '1', checked: true },
     { name: 'Mine', ID: '2', checked: false },
   ];
+
+  public finalAmount = 1;
+  public currency = 'EUR';
+  public addScript = false;
+  public clientId: string = '';
+
+  paypalConfig: any;
 
   constructor(
     private _matSnackBar: MatSnackBar,
@@ -41,10 +51,7 @@ export class CheckComponent extends BaseComponent implements OnInit {
     this.getEstablishmentPaymentMethodsSettings();
   }
 
-  everyone: boolean = true;
-  mine: boolean;
   onRadioButtonChange(event) {
-    this.everyone = event.value;
     this.getCheckOrderList(event.value);
   }
 
@@ -69,9 +76,11 @@ export class CheckComponent extends BaseComponent implements OnInit {
   onCheckboxChange(value, event) {
     if (!event.checked) {
       this.checkedItems.forEach((x) => {
-        if (x.id === value.id) {
+        if (x.menuItemId === value.menuItemId) {
           this.checkedItems.splice(
-            this.checkedItems.findIndex((y) => y.id == value.id),
+            this.checkedItems.findIndex(
+              (y) => y.menuItemId == value.menuItemId
+            ),
             1
           );
         }
@@ -79,16 +88,19 @@ export class CheckComponent extends BaseComponent implements OnInit {
 
       this.orderItemIds.forEach((x) => {
         this.orderItemIds.splice(
-          this.checkedItems.indexOf((y) => y == value.id)
+          this.checkedItems.indexOf((y) => y == value.menuItemId)
         ),
           1;
       });
     } else {
       this.checkedItems.push(value);
-      this.orderItemIds.push(value.orderItemId);
+      this.orderItemIds.push(value.menuItemId);
     }
-    console.log(this.orderItemIds, 'orderItemIds');
-    console.log(this.checkedItems, 'checkedItems');
+
+    this.selectedTotal = this.checkedItems.reduce(
+      (total, x) => total + x.price,
+      0
+    );
   }
 
   onSelecteAll() {
@@ -103,13 +115,16 @@ export class CheckComponent extends BaseComponent implements OnInit {
     });
   }
 
-  initializePaymentRequest() {
+  initializePaymentRequest(paymentType?) {
     const reqBody = new OrderItemsPaymentRequest();
     reqBody.items = [];
     this.checkedItems.forEach((x) => {
       reqBody.items.push(this.initializePaymentItems(x));
     });
     reqBody.extraItems = [];
+    if (paymentType?.length) {
+      reqBody.type = paymentType;
+    }
 
     return reqBody;
   }
@@ -133,6 +148,7 @@ export class CheckComponent extends BaseComponent implements OnInit {
       next: (res) => {
         this.isLoading = false;
         this.orderItemPrice = res;
+        this.finalAmount = this.orderItemPrice.priceInBaseCurrency;
         this.getEstablishmentPaymentMethods();
       },
       error: (err) => {
@@ -166,7 +182,10 @@ export class CheckComponent extends BaseComponent implements OnInit {
     this._paymentService.getEstablishmentPaymentMethodsSettings().subscribe({
       next: (res) => {
         this.paymentMethodsSettings = res;
-        console.log(this.paymentMethodsSettings, 'paymentMethodsSettings');
+        this.clientId = this.paymentMethodsSettings.payPalSettings.clientId;
+        this.currency = this.paymentMethodsSettings.payPalSettings.currency;
+        this.definedPaypalObj();
+        this.definedPaypalmehtod();
         this.isLoading = false;
       },
       error: (err) => {
@@ -177,5 +196,70 @@ export class CheckComponent extends BaseComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  requestOrderItemsPayment(paymnet) {
+    let data = this.initializePaymentRequest(paymnet);
+    if (!Object.entries(data).length) {
+      this.showError('Please select item');
+      return;
+    }
+
+    this._paymentService.requestOrderItemsPayment(data).subscribe({
+      next: (res) => {
+        console.log(res, 'res');
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.showError(err.message);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  /* Paypay **/
+
+  addPayPalScrinpt() {
+    this.addScript = true;
+    return new Promise((resolve, reject) => {
+      let scripttagElement = document.createElement('script');
+      scripttagElement.src = `https://www.paypalobjects.com/api/checkout.js`;
+      scripttagElement.onload = resolve;
+      document.body.appendChild(scripttagElement);
+    });
+  }
+
+  definedPaypalObj() {
+    return (this.paypalConfig = {
+      env: 'sandbox',
+      client: {
+        sandbox: this.clientId,
+        production: '<your-produciton id>',
+      },
+      commit: true,
+      payment: (data, actions) => {
+        return actions.payment.create({
+          payment: {
+            transactions: [
+              { amount: { total: this.finalAmount, currency: this.currency } },
+            ],
+          },
+        });
+      },
+      onAuthorize: (data, actions) => {
+        return actions.payment.execute().then((payment) => {
+          // Do something when payment is successful
+        });
+      },
+    });
+  }
+  definedPaypalmehtod() {
+    if (!this.addScript) {
+      this.addPayPalScrinpt().then(() => {
+        paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
+      });
+    }
   }
 }
