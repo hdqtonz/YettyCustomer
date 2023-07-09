@@ -5,7 +5,7 @@ export class paymentAPIEndpoints {
    * summary: Lists the available payment methods for an establishment
    * @type {string}
    */
-  static _listEstablishmentPaymentMethods: string = "establishments/{{establishmentId}}/payment-methods";
+  static _listEstablishmentPaymentMethods: string = "establishments/{establishmentId}/payment-methods";
 
 
   /**
@@ -13,7 +13,7 @@ export class paymentAPIEndpoints {
    * summary: Returns the settings of the available payment methods for an establishment which are required to load provider-specific scripts
    * @type {string}
    */
-  static _getEstablishmentPaymentMethodsSettings: string = "establishments/{{establishmentId}}/payment-methods-settings";
+  static _getEstablishmentPaymentMethodsSettings: string = "establishments/{establishmentId}/payment-methods-settings";
 
 
   /**
@@ -21,7 +21,7 @@ export class paymentAPIEndpoints {
    * summary: Calculates the price of selected order items of a table visitor before a payment request is submitted
    * @type {string}
    */
-  static _calculateOrderItemsPrice: string = "establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/calculate-order-items-price";
+  static _calculateOrderItemsPrice: string = "establishments/{establishmentId}/tables/{tableId}/visitors/{visitorId}/calculate-order-items-price";
 
 
   /**
@@ -29,7 +29,7 @@ export class paymentAPIEndpoints {
    * summary: Requests the payment of a table visitor's order items
    * @type {string}
    */
-  static _requestOrderItemsPayment: string = "establishments/{{establishmentId}}/tables/{{tableId}}/visitors/{{visitorId}}/payment-requests";
+  static _requestOrderItemsPayment: string = "establishments/{establishmentId}/tables/{tableId}/visitors/{visitorId}/payment-requests";
 
 
   /**
@@ -37,7 +37,7 @@ export class paymentAPIEndpoints {
    * summary: Confirms the payment of a PayPal order
    * @type {string}
    */
-  static _confirmPayPalOrderPayment: string = "establishments/{{establishmentId}}/tables/{{tableId}}/payments/paypal/orders/{{orderId}}";
+  static _confirmPayPalOrderPayment: string = "establishments/{establishmentId}/tables/{tableId}/payments/paypal/orders";
 
 
   /**
@@ -45,7 +45,7 @@ export class paymentAPIEndpoints {
    * summary: Cancels the payment of a PayPal order
    * @type {string}
    */
-  static _cancelPayPalOrderPayment: string = "establishments/{{establishmentId}}/tables/{{tableId}}/payments/paypal/orders/{{orderId}}";
+  static _cancelPayPalOrderPayment: string = "establishments/{establishmentId}/tables/{tableId}/payments/paypal/orders";
 
 
   /**
