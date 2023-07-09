@@ -4,6 +4,9 @@ import { orderAPIEndpoints } from '../class/endpoints/orders';
 import { Order } from '../interface/Order';
 import { OrderItemRequest } from '../interface/OrderItemRequest';
 import { HttpClientService } from './http-client.service';
+import { TransferOrderItemsRequest } from '../interface/TransferOrderItemsRequest';
+import { orderTransferRequestAPIEndpoints } from '../class/endpoints/orderTransferRequests';
+import { OrderItemsTransferRequest } from '../interface/OrderItemsTransferRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +44,22 @@ export class OrdersService {
   cancelSentVisitorOrderItem(orderId: string) {
     return this._http.delete(
       `${orderAPIEndpoints._cancelSentOrderItem}/${orderId}/cancel`
+    );
+  }
+
+  listTableVisitorTransferRequests() {
+    return this._http.get<OrderItemsTransferRequest>(
+      `${orderTransferRequestAPIEndpoints._listTableVisitorTransferRequests}`,
+      {
+        params: new CustomHttpParams(true),
+      }
+    );
+  }
+
+  requestOrderItemsTransfer(reqBody: TransferOrderItemsRequest) {
+    return this._http.post<any>(
+      `${orderTransferRequestAPIEndpoints._requestOrderItemsTransfer}`,
+      reqBody
     );
   }
 }

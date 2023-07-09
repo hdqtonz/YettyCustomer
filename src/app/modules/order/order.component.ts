@@ -18,6 +18,8 @@ import { EstablishmentTable } from 'src/app/core/interface/Table';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { LocalStorage } from 'src/app/core/class/local-storage';
 import { EstablishmentsService } from 'src/app/core/services/establishments.service';
+import { MenuItemObj } from './order';
+import { TransferOrderItemsRequest } from 'src/app/core/interface/TransferOrderItemsRequest';
 
 @Component({
   selector: 'app-order',
@@ -43,17 +45,20 @@ export class OrderComponent extends BaseComponent implements OnInit {
   public TableId: string;
   public visitorId: string;
   public orderItemsTrasferItem: any = [];
+  public transferItems: MenuItemObj[] = [];
 
   // Total section variables
-  public isNewOrderAvaiable: boolean;
-  public isSentOrderAvaiable: boolean;
-  public isConfirmedOrderAvaiable: boolean;
-  public isServedOrderAvaiable: boolean;
+  public isNewOrderAvailable: boolean;
+  public isSentOrderAvailable: boolean;
+  public isConfirmedOrderAvailable: boolean;
+  public isServedOrderAvailable: boolean;
 
   public taxFee: number = 8.3;
   public voucher: number = 7;
+  public selectedVisitor: string;
 
   @ViewChild('closebutton') PrefCloseButton: ElementRef;
+  @ViewChild('closebutton1') PrefCloseButton1: ElementRef;
 
   constructor(
     private _matSnackBar: MatSnackBar,
@@ -101,7 +106,6 @@ export class OrderComponent extends BaseComponent implements OnInit {
       .subscribe({
         next: (res: EstablishmentTable) => {
           this.tableInfo = res;
-          console.log(this.tableInfo, 'tableInfo');
           // setting up customer count
           this.isLoading = false;
         },
@@ -131,7 +135,6 @@ export class OrderComponent extends BaseComponent implements OnInit {
         if (!this.orders.orderItems.length) {
           // this.navigateTo(this.AppRoute.Menu +'/'+ this.AppRoute.Item);
         }
-        console.log(this.orders, 'orders');
         this.getNewOrders(this.orders);
         this.getSentOrders(this.orders);
         this.getConfirmedOrder(this.orders);
@@ -160,7 +163,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
       }
     });
 
-    this.isNewOrderAvaiable = this.newOrders.length ? true : false;
+    this.isNewOrderAvailable = this.newOrders.length ? true : false;
   }
 
   /**
@@ -174,7 +177,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
       }
     });
 
-    this.isSentOrderAvaiable = this.sentOrders.length ? true : false;
+    this.isSentOrderAvailable = this.sentOrders.length ? true : false;
   }
 
   /**
@@ -188,7 +191,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
       }
     });
 
-    this.isConfirmedOrderAvaiable = this.confirmedOrders.length ? true : false;
+    this.isConfirmedOrderAvailable = this.confirmedOrders.length ? true : false;
   }
 
   /**
@@ -202,7 +205,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
       }
     });
 
-    this.isServedOrderAvaiable = this.servedOrders.length ? true : false;
+    this.isServedOrderAvailable = this.servedOrders.length ? true : false;
   }
 
   /**
@@ -231,7 +234,6 @@ export class OrderComponent extends BaseComponent implements OnInit {
    */
   onClickEditOrder(menuItem: any) {
     this.editOrderData = menuItem;
-    console.log(this.editOrderData, 'editOrderData');
   }
 
   /**
@@ -285,6 +287,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
         this.showMessage('Item edited successfully');
         this.isLoading = false;
         this.getVisitorOrder();
+        this.comment = '';
       },
       error: (err) => {
         this.isLoading = false;
@@ -325,7 +328,6 @@ export class OrderComponent extends BaseComponent implements OnInit {
     this.isLoading = true;
     this._orderService.cancelSentVisitorOrderItem(orderId).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.showMessage('Order cancelled successfully');
         this.isLoading = false;
         this.getVisitorOrder();
@@ -341,6 +343,8 @@ export class OrderComponent extends BaseComponent implements OnInit {
   }
 
   onCheckBoxChange(event, value) {
+    let menuItemObj = new MenuItemObj();
+
     if (!event.checked) {
       this.orderItemsTrasferItem.forEach((x) => {
         if (x.id === value.id) {
@@ -350,11 +354,77 @@ export class OrderComponent extends BaseComponent implements OnInit {
           );
         }
       });
+
+      if (this.transferItems.find((x) => x.menuItemId == value.menuItemId)) {
+        let index = this.transferItems.findIndex(
+          (x) => x.menuItemId == value.menuItemId
+        );
+        if (this.transferItems[index].count > 1) {
+          this.transferItems[index].count -= 1;
+          this.transferItems[index].price -= value.price;
+        } else {
+          this.transferItems.splice(index, 1);
+        }
+      } else {
+        menuItemObj.menuItemId = value.menuItemId;
+        menuItemObj.menuItem = value.menuItem;
+        menuItemObj.price = value.price;
+        menuItemObj.count = 1;
+      }
     } else {
+      if (this.transferItems.find((x) => x.menuItemId == value.menuItemId)) {
+        let index = this.transferItems.findIndex(
+          (x) => x.menuItemId == value.menuItemId
+        );
+        this.transferItems[index].count += 1;
+        this.transferItems[index].price += value.price;
+      } else {
+        menuItemObj.menuItemId = value.menuItemId;
+        menuItemObj.menuItem = value.menuItem;
+        menuItemObj.price = value.price;
+        menuItemObj.count = 1;
+        this.transferItems.push(menuItemObj);
+      }
+
       this.orderItemsTrasferItem.push(value);
     }
+    this._cdr.detectChanges();
+  }
 
-    console.log(this.orderItemsTrasferItem, 'orderItemsTrasferItem');
+  initializeTransferOderPayload() {
+    const reqBody = new TransferOrderItemsRequest();
+    reqBody.orderItemIds = this.orderItemsTrasferItem.map((x) => x.id);
+    reqBody.extraOrderItemIds = [];
+    reqBody.visitorId = this.selectedVisitor;
+
+    return reqBody;
+  }
+
+  /**
+   *
+   * @returns
+   */
+  requestOrderItemsTransfer() {
+    const reqBody = this.initializeTransferOderPayload();
+    if (!this.orderItemsTrasferItem.length && !this.selectedVisitor.length) {
+      this.showError('Please Select item');
+      return;
+    }
+    this._orderService.requestOrderItemsTransfer(reqBody).subscribe({
+      next: (res) => {
+        this.showMessage('Oder transfer successfully');
+        this.getVisitorOrder();
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.showError(err.message);
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.PrefCloseButton1.nativeElement.click();
+        this.isLoading = false;
+      },
+    });
   }
 
   /**
