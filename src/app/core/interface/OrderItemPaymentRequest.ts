@@ -1,4 +1,4 @@
-export interface OrderItemPaymentRequest {
+export class OrderItemPaymentRequest {
   visitorId: string;
   orderItemId: string;
 }

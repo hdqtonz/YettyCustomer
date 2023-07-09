@@ -1,5 +1,7 @@
-export interface OrderItemsPaymentRequest {
-  items: string;
-  extraItems: string;
+import { OrderItemPaymentRequest } from './OrderItemPaymentRequest';
+
+export class OrderItemsPaymentRequest {
+  items: OrderItemPaymentRequest[];
+  extraItems: OrderItemPaymentRequest[];
   type: string;
 }

@@ -5,39 +5,62 @@ import { PaymentMethods } from '../interface/PaymentMethods';
 import { PaymentMethodsSettings } from '../interface/PaymentMethodsSettings';
 import { PaymentRequestResult } from '../interface/PaymentRequestResult';
 import { HttpClientService } from './http-client.service';
+import { OrderItemsPaymentRequest } from '../interface/OrderItemsPaymentRequest';
+import { CustomHttpParams } from '../class/customParams';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaymentService {
-
-  constructor(private _http: HttpClientService) { }
+  constructor(private _http: HttpClientService) {}
 
   getEstablishmentPaymentMethods() {
-    return this._http.get<PaymentMethods>(`${paymentAPIEndpoints._listEstablishmentPaymentMethods}`);
+    return this._http.get<PaymentMethods>(
+      `${paymentAPIEndpoints._listEstablishmentPaymentMethods}`
+    );
   }
 
   getEstablishmentPaymentMethodsSettings() {
-    return this._http.get<PaymentMethodsSettings>(`${paymentAPIEndpoints._getEstablishmentPaymentMethodsSettings}`);
+    return this._http.get<PaymentMethodsSettings>(
+      `${paymentAPIEndpoints._getEstablishmentPaymentMethodsSettings}`
+    );
   }
 
   calculateOrderItemsPrice() {
-    return this._http.post<OrderItemsPrice>(`${paymentAPIEndpoints._calculateOrderItemsPrice}`);
+    return this._http.post<OrderItemsPrice>(
+      `${paymentAPIEndpoints._calculateOrderItemsPrice}`
+    );
   }
 
   requestOrderItemsPayment() {
-    return this._http.post<PaymentRequestResult>(`${paymentAPIEndpoints._requestOrderItemsPayment}`);
+    return this._http.post<PaymentRequestResult>(
+      `${paymentAPIEndpoints._requestOrderItemsPayment}`
+    );
   }
 
   confirmPayPalOrderPayment(orderId: string) {
-    return this._http.post(`${paymentAPIEndpoints._confirmPayPalOrderPayment}/${orderId}`);
+    return this._http.post(
+      `${paymentAPIEndpoints._confirmPayPalOrderPayment}/${orderId}`
+    );
   }
 
   cancelPayPalOrderPayment(orderId: string) {
-    return this._http.delete(`${paymentAPIEndpoints._cancelPayPalOrderPayment}/${orderId}`);
+    return this._http.delete(
+      `${paymentAPIEndpoints._cancelPayPalOrderPayment}/${orderId}`
+    );
   }
 
   setEpayPaymentStatus() {
-    return this._http.post(`${paymentAPIEndpoints.setEpayPaymentStatus}`)
+    return this._http.post(`${paymentAPIEndpoints.setEpayPaymentStatus}`);
+  }
+
+  calculateOrderItemsPriceReq(reqBody: OrderItemsPaymentRequest) {
+    return this._http.post<OrderItemsPrice>(
+      `${paymentAPIEndpoints._calculateOrderItemsPrice}`,
+      reqBody,
+      {
+        params: new CustomHttpParams(true),
+      }
+    );
   }
 }

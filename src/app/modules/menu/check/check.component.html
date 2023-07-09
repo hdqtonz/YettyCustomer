@@ -1,71 +1,129 @@
 <div class="container mb-5 mt-4">
-    <div class="radio-btns">
-        <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedTable" color="primary" >
-            <div class="radio-btn-container">
-                <mat-radio-button value="true" (change)="onRadioButtonChange($event)"><span class="check-item">Everyone's</span></mat-radio-button>
-            </div>
-            <div class="radio-btn-container">
-                <mat-radio-button value="false" (change)="onRadioButtonChange($event)"><span class="check-item">Mine</span></mat-radio-button>
-            </div>
-          </mat-radio-group>
-    </div>
+  <div class="radio-btns">
+    <mat-radio-group
+      name="opList"
+      aria-label="Select an option"
+      color="primary"
+    >
+      <div *ngFor="let item of chekbox" class="radio-btn-container">
+        <mat-radio-button
+          name="opList"
+          [value]="item.checked"
+          [checked]="item.checked"
+          (change)="onRadioButtonChange($event)"
+          ><span class="check-item">{{ item.name }}</span></mat-radio-button
+        >
+      </div>
+      <!-- <div class="radio-btn-container">
+        <mat-radio-button
+          value="false"
+          [checked]="mine"
+          (change)="onRadioButtonChange($event)"
+          ><span class="check-item">Mine</span></mat-radio-button
+        >
+      </div> -->
+    </mat-radio-group>
+  </div>
 </div>
-
 
 <div class="container">
-    <div class="check-container p-5 mb-5">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                <button class="order-type-header">Item Name</button>
-                <div class="item-name" *ngFor="let item of check?.items">
-                    <mat-checkbox [value]="item?.menuItemId" color="primary" (change)="onCheckboxChange()"><span class="check-item"> {{ item?.menuItem ? item?.menuItem : "NA" }} </span></mat-checkbox>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                <button class="order-type-header">Item Price</button>
-                <div class="item-price" *ngFor="let item of check?.items">$ {{ item?.price ? item?.price : "NA" }} </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                <button class="order-type-header">Visitor Name</button>
-                <div class="item-price" *ngFor="let item of check?.items"> {{ item?.visitor ? item?.visitor : "NA" }} </div>
-            </div>
+  <div class="check-container p-5 mb-5">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <button class="order-type-header">Item Name</button>
+        <div class="item-name" *ngFor="let item of check?.items">
+          <mat-checkbox
+            color="primary"
+            [checked]="orderItemIds.includes(item.orderItemId)"
+            (change)="onCheckboxChange(item, $event)"
+            ><span class="check-item">
+              {{ item?.menuItem ? item?.menuItem : "NA" }}
+            </span></mat-checkbox
+          >
         </div>
-        <div class="check-details-container mt-5 mb-5">
-            <!--<div class="check-details">
-                <div class="check-heading ">Discount:</div>
-                <div class="check-value ">10%</div>
-            </div>-->
-            <div class="check-details">
-                <div class="check-heading ">Selected:</div>
-                <div class="check-value ">$23</div>
-            </div>
-            <div class="check-details">
-                <div class="check-heading ">Total:</div>
-                <div class="check-value "> {{ check?.totalPrice | currency }} </div>
-            </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <button class="order-type-header">Item Price</button>
+        <div class="item-price" *ngFor="let item of check?.items">
+          $ {{ item?.price ? item?.price : "NA" }}
         </div>
-        <div class="check-btn-container">
-            <button class="check-btn select-btn" (click)="checkUncheckAllCheckbox()">Select/Unselect all</button>
-            <button class="check-btn pay-btn" data-bs-target="#paymentModal" data-bs-toggle="modal">Pay for Selected</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade modal-lg" id="paymentModal" aria-hidden="true" aria-labelledby="transferOrderModalLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 w-100 text-center" id="transferOrderModalLabel2">Payment</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="text-center">Amount: BNG 350</div>
-        </div>
-        <div class="modal-footer justify-content-center">
-          <button class="transfer-btn" data-bs-dismiss="modal">IN CASH</button>
-          <button class="cancel-btn" data-bs-dismiss="modal">ON POS TERMINAL</button>
-          <button class="cancel-btn" data-bs-dismiss="modal">PAYPAL</button>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <button class="order-type-header">Visitor Name</button>
+        <div class="item-price" *ngFor="let item of check?.items">
+          {{ item?.visitor ? item?.visitor : "NA" }}
         </div>
       </div>
     </div>
+    <div class="check-details-container mt-5 mb-5">
+      <!--<div class="check-details">
+                <div class="check-heading ">Discount:</div>
+                <div class="check-value ">10%</div>
+            </div>-->
+      <div class="check-details">
+        <div class="check-heading">Selected:</div>
+        <div class="check-value">$23</div>
+      </div>
+      <div class="check-details">
+        <div class="check-heading">Total:</div>
+        <div class="check-value">{{ check?.totalPrice | currency }}</div>
+      </div>
+    </div>
+    <div class="check-btn-container">
+      <button
+        class="check-btn select-btn"
+        (click)="orderItemIds.length ? onUnselecteAll() : onSelecteAll()"
+      >
+        Select/Unselect all
+      </button>
+      <button
+        (click)="onPayment()"
+        class="check-btn pay-btn"
+        data-bs-target="#paymentModal"
+        data-bs-toggle="modal"
+      >
+        Pay for Selected
+      </button>
+    </div>
   </div>
+</div>
+
+<div
+  class="modal fade modal-lg"
+  id="paymentModal"
+  aria-hidden="true"
+  aria-labelledby="transferOrderModalLabel2"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1
+          class="modal-title fs-5 w-100 text-center"
+          id="transferOrderModalLabel2"
+        >
+          Payment
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          Amount: {{ orderItemPrice?.baseCurrency }}
+          {{ orderItemPrice?.priceInBaseCurrency }}
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button class="transfer-btn" data-bs-dismiss="modal">IN CASH</button>
+        <button class="cancel-btn" data-bs-dismiss="modal">
+          ON POS TERMINAL
+        </button>
+        <button class="cancel-btn" data-bs-dismiss="modal">PAYPAL</button>
+      </div>
+    </div>
+  </div>
+</div>
