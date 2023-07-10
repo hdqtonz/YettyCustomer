@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from '../../../core/class/base-component';
 import { Check } from '../../../core/interface/Check';
@@ -9,8 +9,8 @@ import { PaymentService } from 'src/app/core/services/payment.service';
 import { OrderItemsPrice } from 'src/app/core/interface/OrderItemsPrice';
 import { PaymentMethods } from 'src/app/core/interface/PaymentMethods';
 import { PaymentMethodsSettings } from 'src/app/core/interface/PaymentMethodsSettings';
-
-declare let paypal: any;
+import { PaypalService } from 'src/app/core/services/paypal.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-check',
@@ -31,17 +31,23 @@ export class CheckComponent extends BaseComponent implements OnInit {
     { name: 'Mine', ID: '2', checked: false },
   ];
 
-  public finalAmount = 1;
-  public currency = 'EUR';
-  public addScript = false;
-  public clientId: string = '';
+  public paymetTypes = ['PAYPAL', 'EPAY'];
 
-  paypalConfig: any;
+  public finalAmount: number;
+  public currency = 'EUR';
+  public clientId: string = '';
+  public paidFor: boolean = false;
+
+  public ePayForm: FormGroup;
+
+  @ViewChild('paymentRef', { static: true }) paymentRef!: ElementRef;
+  @ViewChild('paytmForm', { read: ElementRef }) paytmForm: ElementRef;
 
   constructor(
     private _matSnackBar: MatSnackBar,
     private _checkService: CheckService,
-    private _paymentService: PaymentService
+    private _paymentService: PaymentService,
+    private _paypalService: PaypalService
   ) {
     super(_matSnackBar);
   }
@@ -139,7 +145,7 @@ export class CheckComponent extends BaseComponent implements OnInit {
 
   onPayment() {
     let data = this.initializePaymentRequest();
-    if (!Object.entries(data).length) {
+    if (!this.orderItemIds.length) {
       this.showError('Please select item');
       return;
     }
@@ -149,6 +155,7 @@ export class CheckComponent extends BaseComponent implements OnInit {
         this.isLoading = false;
         this.orderItemPrice = res;
         this.finalAmount = this.orderItemPrice.priceInBaseCurrency;
+        this.paypal();
         this.getEstablishmentPaymentMethods();
       },
       error: (err) => {
@@ -184,8 +191,6 @@ export class CheckComponent extends BaseComponent implements OnInit {
         this.paymentMethodsSettings = res;
         this.clientId = this.paymentMethodsSettings.payPalSettings.clientId;
         this.currency = this.paymentMethodsSettings.payPalSettings.currency;
-        this.definedPaypalObj();
-        this.definedPaypalmehtod();
         this.isLoading = false;
       },
       error: (err) => {
@@ -198,6 +203,7 @@ export class CheckComponent extends BaseComponent implements OnInit {
     });
   }
 
+  public settings: any;
   requestOrderItemsPayment(paymnet) {
     let data = this.initializePaymentRequest(paymnet);
     if (!Object.entries(data).length) {
@@ -220,46 +226,74 @@ export class CheckComponent extends BaseComponent implements OnInit {
   }
 
   /* Paypay **/
-
-  addPayPalScrinpt() {
-    this.addScript = true;
-    return new Promise((resolve, reject) => {
-      let scripttagElement = document.createElement('script');
-      scripttagElement.src = `https://www.paypalobjects.com/api/checkout.js`;
-      scripttagElement.onload = resolve;
-      document.body.appendChild(scripttagElement);
-    });
-  }
-
-  definedPaypalObj() {
-    return (this.paypalConfig = {
-      env: 'sandbox',
-      client: {
-        sandbox: this.clientId,
-        production: '<your-produciton id>',
-      },
-      commit: true,
-      payment: (data, actions) => {
-        return actions.payment.create({
-          payment: {
-            transactions: [
-              { amount: { total: this.finalAmount, currency: this.currency } },
-            ],
+  paypal() {
+    this._paypalService.initiate(this.clientId, this.currency).subscribe(() =>
+      paypal
+        .Buttons({
+          style: {
+            layout: 'horizontal',
+            color: 'gold',
+            shape: 'rect',
+            label: 'paypal',
+            tagline: false,
           },
-        });
+          // THE REST IS JUST TYPICAL PAYPAL BUTTON STUFF.
+          createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  // description: this.product.description,
+                  amount: {
+                    currency_code: this.currency,
+                    value: this.finalAmount,
+                  },
+                },
+              ],
+            });
+          },
+
+          onApprove: async (data, actions) => {
+            const order = await actions.order.capture();
+            this.paidFor = true;
+            console.log(order);
+          },
+        })
+        .render(this.paymentRef.nativeElement)
+    );
+  }
+
+  /**
+   * Epay
+   */
+  requestOrderItemEPay() {
+    let data = this.initializePaymentRequest('EPAY');
+    if (!Object.entries(data).length) {
+      this.showError('Please select item');
+      return;
+    }
+    this._paymentService.requestOrderItemEPay(data).subscribe({
+      next: (res) => {
+        this.settings = JSON.parse(res.paymentSettings);
+        this.paytmForm.nativeElement.submit();
+        this.isLoading = false;
       },
-      onAuthorize: (data, actions) => {
-        return actions.payment.execute().then((payment) => {
-          // Do something when payment is successful
-        });
+      error: (err) => {
+        this.isLoading = false;
+        this.showError(err.message);
+      },
+      complete: () => {
+        this.isLoading = false;
       },
     });
   }
-  definedPaypalmehtod() {
-    if (!this.addScript) {
-      this.addPayPalScrinpt().then(() => {
-        paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
-      });
-    }
+  createEPayForm() {
+    this.ePayForm = new FormGroup({
+      PAGE: new FormControl(Validators.required),
+      ENCODED: new FormControl(Validators.required),
+      CHECKSUM: new FormControl(Validators.required),
+      URL_OK: new FormControl(Validators.required),
+      URL_CANCEL: new FormControl(Validators.required),
+      LANG: new FormControl(Validators.required),
+    });
   }
 }

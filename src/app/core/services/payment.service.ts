@@ -40,6 +40,12 @@ export class PaymentService {
     );
   }
 
+  requestOrderItemEPay(reqBody: OrderItemsPaymentRequest) {
+    let url = paymentAPIEndpoints._requestOrderItemsPayment;
+    url = url + '?currency=BGN';
+    return this._http.post<PaymentRequestResult>(`${url}`, reqBody);
+  }
+
   confirmPayPalOrderPayment(orderId: string) {
     return this._http.post(
       `${paymentAPIEndpoints._confirmPayPalOrderPayment}/${orderId}`

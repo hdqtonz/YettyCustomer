@@ -78,6 +78,7 @@
         Select/Unselect all
       </button>
       <button
+        *ngIf="orderItemIds.length"
         (click)="onPayment()"
         class="check-btn pay-btn"
         data-bs-target="#paymentModal"
@@ -119,24 +120,43 @@
         </div>
       </div>
       <div class="modal-footer justify-content-center">
+        <ng-container *ngFor="let item of paymentMethods?.paymentMethods">
+          <button
+            *ngIf="!paymetTypes.includes(item.type)"
+            (click)="requestOrderItemsPayment(item.type)"
+            class="transfer-btn"
+            [ngClass]="{
+              'transfer-btn': item.type === 'CASH',
+              'cancel-btn': item.type !== 'CASH'
+            }"
+            data-bs-dismiss="modal"
+          >
+            {{ item.name }}
+          </button>
+        </ng-container>
+
         <button
-          *ngFor="let item of paymentMethods?.paymentMethods"
-          (click)="requestOrderItemsPayment(item.type)"
-          class="transfer-btn"
-          [ngClass]="{
-            'transfer-btn': item.type === 'CASH',
-            'cancel-btn': item.type !== 'CASH'
-          }"
+          (click)="requestOrderItemEPay()"
+          class="cancel-btn"
           data-bs-dismiss="modal"
         >
-          {{ item.name }}
+          E-Pay
         </button>
-        <!-- <button class="cancel-btn" data-bs-dismiss="modal">
-          ON POS TERMINAL
-        </button> -->
-        <!-- <button id="paypal-checkout-btn" class="cancel-btn" data-bs-dismiss="modal">PAYPAL</button> -->
-        <div id="paypal-checkout-btn"></div>
+      </div>
+      <div class="mx-4 my-2">
+        <div #paymentRef></div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- E pay Form -->
+<form #paytmForm [action]="settings?.URL" method="post">
+  <input type="hidden" name="PAGE" [value]="settings?.PAGE" />
+  <input type="hidden" name="ENCODED" [value]="settings?.ENCODED" />
+  <input type="hidden" name="CHECKSUM" [value]="settings?.CHECKSUM" />
+  <input type="hidden" name="URL_OK" [value]="settings?.URL_OK" />
+  <input type="hidden" name="URL_CANCEL" [value]="settings?.URL_CANCEL" />
+  <input type="hidden" name="LANG" value="EN" />
+  <input type="submit" />
+</form>

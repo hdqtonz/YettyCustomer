@@ -5,7 +5,6 @@ import englishTranslations from '../../../assets/i18n/en.json';
 import { LocalStorage } from '../class/local-storage';
 import { Languages } from '../enum/languages';
 
-
 const LOCALE = 'defaultLanguage';
 
 // export enum Locale {
@@ -22,7 +21,10 @@ export class LocalizationService {
   constructor(private translateService: TranslateService) {}
 
   setDefaults() {
-    this.translateService.setTranslation(Languages.English, englishTranslations);
+    this.translateService.setTranslation(
+      Languages.English,
+      englishTranslations
+    );
     this.translateService.setDefaultLang(Languages.English);
   }
 
